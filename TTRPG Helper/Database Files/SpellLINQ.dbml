@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Spells" Class="SpellLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=&quot;|DataDirectory|\Database Files\Spells.mdf&quot;;Integrated Security=True" SettingsObjectName="TTRPG_Helper.Properties.Settings" SettingsPropertyName="SpellsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.PreparedSpells" Member="PreparedSpells">
+    <Type Name="PreparedSpell">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CharacterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SpellName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DiceAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DiceSize" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

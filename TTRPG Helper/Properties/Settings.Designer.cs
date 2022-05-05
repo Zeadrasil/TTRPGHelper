@@ -33,5 +33,27 @@ namespace TTRPG_Helper.Properties {
                 return ((string)(this["CharactersConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"|DataDirectory|\\Database Fil" +
+            "es\\Items.mdf\";Integrated Security=True")]
+        public string ItemsConnectionString {
+            get {
+                return ((string)(this["ItemsConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"|DataDirectory|\\Database Fil" +
+            "es\\Spells.mdf\";Integrated Security=True")]
+        public string SpellsConnectionString {
+            get {
+                return ((string)(this["SpellsConnectionString"]));
+            }
+        }
     }
 }

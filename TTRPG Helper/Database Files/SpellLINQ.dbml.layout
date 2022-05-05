@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SpellLINQ">
+  <DataContextMoniker Name="/SpellLINQDataContext" />
+  <nestedChildShapes>
+    <classShape Id="11e2c97f-45e3-4039-9f69-d1e65a2c778b" absoluteBounds="1.625, 1.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/SpellLINQDataContext/PreparedSpell" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ddbaee4e-efd9-48da-9c92-8290714002e0" absoluteBounds="1.6400000000000001, 2.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
