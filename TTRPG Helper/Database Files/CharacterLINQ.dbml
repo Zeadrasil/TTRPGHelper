@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Characters" Class="CharacterLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=&quot;|DataDirectory|\Database Files\Characters.mdf&quot;;Integrated Security=True" SettingsObjectName="TTRPG_Helper.Properties.Settings" SettingsPropertyName="CharactersConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Bonuses" Member="Bonuses">
+    <Type Name="Bonuse">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CharacterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Effect" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NPCs" Member="NPCs">
+    <Type Name="NPC">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CharacterId" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Occupation" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Characters" Member="Characters">
+    <Type Name="Character">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Experience" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Strength" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Dexterity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Constitution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Wisdom" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Intelligence" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Charisma" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ArmorClass" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaxHealth" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Health" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Class" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Money" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CharacterName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Race" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Monster" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Speed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PlayerCharacter" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

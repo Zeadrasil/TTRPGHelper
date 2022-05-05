@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.375" name="CharacterLINQ">
+  <DataContextMoniker Name="/CharacterLINQDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8c95c571-5d53-4218-8ea5-e5170f53caf3" absoluteBounds="1.875, 1.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CharacterLINQDataContext/Bonuse" />
+      <nestedChildShapes>
+        <elementListCompartment Id="643ab225-52cc-4497-b0fe-11768056d6c1" absoluteBounds="1.8900000000000001, 1.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="17084fc6-5206-4da5-9e28-15851ce64f75" absoluteBounds="2.25, 7.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CharacterLINQDataContext/NPC" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10fc50c6-00ad-46ee-8859-ff271ed0f0c3" absoluteBounds="2.265, 8.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1e8a4f4-db3c-46d4-9397-ca5b2f7922de" absoluteBounds="2.875, 3.75, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/CharacterLINQDataContext/Character" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2eb2f6bc-8549-4d34-92f4-4efd362de961" absoluteBounds="2.89, 4.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
