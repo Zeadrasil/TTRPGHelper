@@ -251,7 +251,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-                if (checkStats())
+                if (dungeonMaster && checkStats())
                 {
                     int tempHolder;
                     if (!int.TryParse(levelTextBox.Text, out tempHolder) || tempHolder < 1)
@@ -282,7 +282,7 @@ namespace TTRPG_Helper.Forms
                         return;
                     }
 
-                    if (classTextBox.Text == "")
+                    if (locationTextBox.Text == "")
                     {
                         MessageBox.Show("Location value is empty, please enter a location");
                         locationTextBox.Focus();
@@ -317,6 +317,25 @@ namespace TTRPG_Helper.Forms
                     npc.Location = locationTextBox.Text;
                     npcbase.NPCs.InsertOnSubmit(npc);
                     npcbase.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void createMonsterButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dungeonMaster && checkStats())
+                {
+                    Being monsterStorage = new Being(-1, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
+                        int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
+                        int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text),
+                        int.Parse(healthTextBox.Text), true, nameTextBox.Text, raceTextBox.Text, getAC());
+                    monsterStorage.trySaveAsNew();
                 }
             }
             catch (Exception ex)

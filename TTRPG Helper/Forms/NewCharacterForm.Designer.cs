@@ -389,6 +389,7 @@ namespace TTRPG_Helper.Forms
             this.createMonsterButton.TabIndex = 38;
             this.createMonsterButton.Text = "Create Monster";
             this.createMonsterButton.UseVisualStyleBackColor = true;
+            this.createMonsterButton.Click += new System.EventHandler(this.createMonsterButton_Click);
             // 
             // NewCharacterForm
             // 
