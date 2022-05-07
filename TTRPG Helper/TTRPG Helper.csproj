@@ -91,6 +91,12 @@
       <DependentUpon>CharacterSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Forms\CharacterSheetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacterSheetForm.Designer.cs">
+      <DependentUpon>CharacterSheetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DMForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\CharacterSelectForm.resx">
       <DependentUpon>CharacterSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CharacterSheetForm.resx">
+      <DependentUpon>CharacterSheetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DMForm.resx">
       <DependentUpon>DMForm.cs</DependentUpon>

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TTRPG_Helper.Classes
 {
-	class Being
+	public class Being
 	{
 		private int characterId, strength, constitution, dexterity, wisdom, intelligence, charisma, maxHealth, speed, health, armorClass;
 		private bool isMonster;

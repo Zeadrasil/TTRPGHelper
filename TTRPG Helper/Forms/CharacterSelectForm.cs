@@ -67,7 +67,7 @@ namespace TTRPG_Helper
         {
 			try
 			{
-				NewCharacterForm ncf= new NewCharacterForm(false);
+				NewCharacterForm ncf = new NewCharacterForm(false);
 				this.Hide();
 				ncf.ShowDialog();
 				this.Show();
@@ -81,8 +81,25 @@ namespace TTRPG_Helper
 
         private void selectCharacterButton_Click(object sender, EventArgs e)
         {
-
-        }
+			try
+			{
+				if(playerListBox.SelectedIndex == -1)
+                {
+					MessageBox.Show("Please choose a character to select");
+					playerListBox.Focus();
+					return;
+                }
+				CharacterSheetForm csf = new CharacterSheetForm(false, characterList[playerListBox.SelectedIndex]);
+				this.Hide();
+				csf.ShowDialog();
+				this.Show();
+				resetCharacterList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
 
 		private void resetCharacterList()
         {
