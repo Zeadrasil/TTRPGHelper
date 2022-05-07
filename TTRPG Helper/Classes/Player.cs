@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TTRPG_Helper.Database_Files;
 using System.Windows.Forms;
 
-namespace TTRPG_Helper.Forms.Login
+namespace TTRPG_Helper.Classes
 {
 	class Player : Entity
 	{

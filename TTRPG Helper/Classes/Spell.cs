@@ -23,7 +23,7 @@ namespace TTRPG_Helper.Classes
 			diceSize = size;
 			spellName = name;
 			spell = new PreparedSpell();
-			spellbase = new SpellLINQDataContext;
+			spellbase = new SpellLINQDataContext();
 		}
 
 		public int getId()
@@ -99,7 +99,6 @@ namespace TTRPG_Helper.Classes
 				spell.SpellName = spellName;
 				spellbase.PreparedSpells.InsertOnSubmit(spell);
 				spellbase.SubmitChanges();
-				return;
 			}
 			catch (Exception ex)
 			{
@@ -121,6 +120,7 @@ namespace TTRPG_Helper.Classes
 						return;
 					}
 				}
+				MessageBox.Show("Could not find spell in database");
 			}
 			catch (Exception ex)
 			{

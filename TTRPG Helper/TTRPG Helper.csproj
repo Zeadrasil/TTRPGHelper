@@ -84,15 +84,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpellLINQ.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Login\Form1.cs">
+    <Compile Include="Forms\CharacterSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\CharacterSelectForm.Designer.cs">
+      <DependentUpon>CharacterSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Forms\DMForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DMForm.Designer.cs">
+      <DependentUpon>DMForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\CharacterSelectForm.resx">
+      <DependentUpon>CharacterSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DMForm.resx">
+      <DependentUpon>DMForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -139,11 +151,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\Administration\" />
-    <Folder Include="Forms\Battles\" />
-    <Folder Include="Forms\Character Management\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

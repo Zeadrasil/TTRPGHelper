@@ -260,7 +260,7 @@ namespace TTRPG_Helper
 						return;
 					}
 				}
-				MessageBox.Show("Could not find character in database")
+				MessageBox.Show("Could not find character in database");
 			}
 			catch(Exception ex)
             {
