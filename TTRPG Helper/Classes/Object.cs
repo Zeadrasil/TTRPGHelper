@@ -118,5 +118,27 @@ namespace TTRPG_Helper.Classes
 				MessageBox.Show(ex.Message);
 			}
 		}
+
+		public void tryDelete()
+        {
+			try
+            {
+				foreach(Item item2 in itembase.Items)
+                {
+					if(item2.Id == itemId)
+                    {
+						itembase.Items.DeleteOnSubmit(item2);
+						itembase.SubmitChanges();
+						itemId = -1;
+						return;
+                    }
+                }
+				MessageBox.Show("Could not find item in database");
+            }
+			catch(Exception ex)
+            {
+				MessageBox.Show(ex.Message);
+            }
+        }
 	}
 }

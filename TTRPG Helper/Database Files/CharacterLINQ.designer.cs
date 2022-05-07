@@ -30,15 +30,15 @@ namespace TTRPG_Helper.Database_Files
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertBonuse(Bonuse instance);
-    partial void UpdateBonuse(Bonuse instance);
-    partial void DeleteBonuse(Bonuse instance);
-    partial void InsertNPC(NPC instance);
-    partial void UpdateNPC(NPC instance);
-    partial void DeleteNPC(NPC instance);
+    partial void InsertBonuses(Bonuses instance);
+    partial void UpdateBonuses(Bonuses instance);
+    partial void DeleteBonuses(Bonuses instance);
     partial void InsertCharacter(Character instance);
     partial void UpdateCharacter(Character instance);
     partial void DeleteCharacter(Character instance);
+    partial void InsertNPC(NPC instance);
+    partial void UpdateNPC(NPC instance);
+    partial void DeleteNPC(NPC instance);
     #endregion
 		
 		public CharacterLINQDataContext() : 
@@ -71,19 +71,11 @@ namespace TTRPG_Helper.Database_Files
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Bonuse> Bonuses
+		public System.Data.Linq.Table<Bonuses> Bonuses
 		{
 			get
 			{
-				return this.GetTable<Bonuse>();
-			}
-		}
-		
-		public System.Data.Linq.Table<NPC> NPCs
-		{
-			get
-			{
-				return this.GetTable<NPC>();
+				return this.GetTable<Bonuses>();
 			}
 		}
 		
@@ -94,10 +86,18 @@ namespace TTRPG_Helper.Database_Files
 				return this.GetTable<Character>();
 			}
 		}
+		
+		public System.Data.Linq.Table<NPC> NPCs
+		{
+			get
+			{
+				return this.GetTable<NPC>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bonuses")]
-	public partial class Bonuse : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Bonuses : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -120,7 +120,7 @@ namespace TTRPG_Helper.Database_Files
     partial void OnEffectChanged();
     #endregion
 		
-		public Bonuse()
+		public Bonuses()
 		{
 			OnCreated();
 		}
@@ -181,116 +181,6 @@ namespace TTRPG_Helper.Database_Files
 					this._Effect = value;
 					this.SendPropertyChanged("Effect");
 					this.OnEffectChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NPCs")]
-	public partial class NPC : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _CharacterId;
-		
-		private string _Occupation;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnCharacterIdChanging(string value);
-    partial void OnCharacterIdChanged();
-    partial void OnOccupationChanging(string value);
-    partial void OnOccupationChanged();
-    #endregion
-		
-		public NPC()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CharacterId", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string CharacterId
-		{
-			get
-			{
-				return this._CharacterId;
-			}
-			set
-			{
-				if ((this._CharacterId != value))
-				{
-					this.OnCharacterIdChanging(value);
-					this.SendPropertyChanging();
-					this._CharacterId = value;
-					this.SendPropertyChanged("CharacterId");
-					this.OnCharacterIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Occupation", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string Occupation
-		{
-			get
-			{
-				return this._Occupation;
-			}
-			set
-			{
-				if ((this._Occupation != value))
-				{
-					this.OnOccupationChanging(value);
-					this.SendPropertyChanging();
-					this._Occupation = value;
-					this.SendPropertyChanged("Occupation");
-					this.OnOccupationChanged();
 				}
 			}
 		}
@@ -785,6 +675,140 @@ namespace TTRPG_Helper.Database_Files
 					this._PlayerCharacter = value;
 					this.SendPropertyChanged("PlayerCharacter");
 					this.OnPlayerCharacterChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NPCs")]
+	public partial class NPC : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _CharacterId;
+		
+		private string _Occupation;
+		
+		private string _Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnCharacterIdChanging(int value);
+    partial void OnCharacterIdChanged();
+    partial void OnOccupationChanging(string value);
+    partial void OnOccupationChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
+    #endregion
+		
+		public NPC()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CharacterId", DbType="Int NOT NULL")]
+		public int CharacterId
+		{
+			get
+			{
+				return this._CharacterId;
+			}
+			set
+			{
+				if ((this._CharacterId != value))
+				{
+					this.OnCharacterIdChanging(value);
+					this.SendPropertyChanging();
+					this._CharacterId = value;
+					this.SendPropertyChanged("CharacterId");
+					this.OnCharacterIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Occupation", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Occupation
+		{
+			get
+			{
+				return this._Occupation;
+			}
+			set
+			{
+				if ((this._Occupation != value))
+				{
+					this.OnOccupationChanging(value);
+					this.SendPropertyChanging();
+					this._Occupation = value;
+					this.SendPropertyChanged("Occupation");
+					this.OnOccupationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Location", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
 				}
 			}
 		}

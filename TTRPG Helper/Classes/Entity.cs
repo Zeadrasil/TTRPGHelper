@@ -34,12 +34,12 @@ namespace TTRPG_Helper
 			race = rce;
 			armorClass = ac;
 			characterbase = new CharacterLINQDataContext();
-			= new Character()
+			character = new Character();
 		}
 
 		public int getId()
 		{
-			return characterID;
+			return characterId;
 		}
 
 		public int getStrength()
@@ -242,16 +242,30 @@ namespace TTRPG_Helper
 				}
 				spellbase.SubmitChanges();
 
+				foreach(NPC npc in characterbase.NPCs)
+                {
+					if(npc.CharacterId == characterId)
+                    {
+						characterbase.NPCs.DeleteOnSubmit(npc);
+                    }
+                }
+
 				foreach(Character character2 in characterbase.Characters)
 				{
 					if(character2.Id == characterId)
 					{
 						characterbase.Characters.DeleteOnSubmit(character2);
 						characterbase.SubmitChanges();
+						characterId = -1;
 						return;
 					}
 				}
+				MessageBox.Show("Could not find character in database")
 			}
+			catch(Exception ex)
+            {
+				MessageBox.Show(ex.Message);
+            }
 		}
 	}
 }
