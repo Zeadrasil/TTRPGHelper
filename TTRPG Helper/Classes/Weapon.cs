@@ -20,6 +20,14 @@ namespace TTRPG_Helper.Classes
 		{
 			diceSize = size;
 			diceAmount = dice;
+			itemId = id;
+			ownerId = own;
+			quantity = quan;
+			itemName = name;
+			itemType = type;
+			cost = cst;
+			item = new Item();
+			itembase = new ItemLINQDataContext();
 		}
 
 		public int getDiceAmount()

@@ -19,6 +19,14 @@ namespace TTRPG_Helper.Classes
 		public Armor(int id, int own, int quan, string name, string type, decimal cst, int ac) : base(id, own, quan, name, type, cst)
 		{
 			armorClass = ac;
+			itemId = id;
+			ownerId = own;
+			quantity = quan;
+			itemName = name;
+			itemType = type;
+			cost = cst;
+			item = new Item();
+			itembase = new ItemLINQDataContext();
 		}
 
 		public int getArmorClass()

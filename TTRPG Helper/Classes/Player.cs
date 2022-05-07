@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TTRPG_Helper.Classes
 {
-	class Player : Entity
+	class Player : Being
 	{
 		private int characterId, strength, constitution, dexterity, wisdom, intelligence, charisma, maxHealth, speed, health, armorClass;
 		private bool isMonster;
@@ -20,13 +20,31 @@ namespace TTRPG_Helper.Classes
 		private string playerClass;
 		private decimal money;
 		private bool isPlayer;
-		public Player(int id, int str, int con, int dex, int wis, int intel, int cha, int max, int spd, int hlt, bool mon, string nme, string rce, int ac, int lvl, int exp, string cls, decimal mny, bool ply) : base(id, str, con, dex, wis, intel, cha, max, spd, hlt, mon, nme, rce, ac)
+		public Player(int id, int str, int con, int dex, int wis, int intel, int cha, int max, int spd, int hlt, bool mon, string nme, string rce, 
+			int ac, int lvl, int exp, string cls, decimal mny, bool ply) : base(id, str, con, dex, wis, intel, cha, max, spd, hlt, mon, nme, rce, ac)
 		{
+			
 			level = lvl;
 			experience = exp;
 			playerClass = cls;
 			money = mny;
 			isPlayer = ply;
+			characterId = id;
+			strength = str;
+			constitution = con;
+			dexterity = dex;
+			wisdom = wis;
+			intelligence = intel;
+			charisma = cha;
+			maxHealth = max;
+			speed = spd;
+			health = hlt;
+			isMonster = mon;
+			name = nme;
+			race = rce;
+			armorClass = ac;
+			characterbase = new CharacterLINQDataContext();
+			character = new Character();
 		}
 
 		public int getLevel()
