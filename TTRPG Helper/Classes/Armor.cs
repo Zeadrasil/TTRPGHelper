@@ -10,23 +10,11 @@ namespace TTRPG_Helper.Classes
 {
 	class Armor : Object
 	{
-		private int itemId, ownerId, quantity, armorClass;
-		private string itemName, itemType;
-		private decimal cost;
-		private Item item;
-		private ItemLINQDataContext itembase;
+		private int armorClass;
 
 		public Armor(int id, int own, int quan, string name, string type, decimal cst, int ac) : base(id, own, quan, name, type, cst)
 		{
 			armorClass = ac;
-			itemId = id;
-			ownerId = own;
-			quantity = quan;
-			itemName = name;
-			itemType = type;
-			cost = cst;
-			item = new Item();
-			itembase = new ItemLINQDataContext();
 		}
 
 		public int getArmorClass()
@@ -44,7 +32,7 @@ namespace TTRPG_Helper.Classes
 			{
 				foreach(Item item2 in itembase.Items)
 				{
-					if(item2.Id == itemId)
+					if(item2.Id == this.getId())
 					{
 						item2.ArmorClassProvided = armorClass;
 						itembase.SubmitChanges();
@@ -61,11 +49,11 @@ namespace TTRPG_Helper.Classes
 		{
 			try
 			{
-				item.Cost = cost;
-				item.OwnerId = ownerId;
-				item.ItemName = itemName;
-				item.ItemType = itemType;
-				item.Quantity = quantity;
+				item.Cost = this.getCost();
+				item.OwnerId = this.getOwner();
+				item.ItemName = this.getName();
+				item.ItemType = this.getType();
+				item.Quantity = this.getAmount();
 				item.ArmorClassProvided = armorClass;
 				itembase.Items.InsertOnSubmit(item);
 				itembase.SubmitChanges();

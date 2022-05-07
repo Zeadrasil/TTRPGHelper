@@ -13,8 +13,8 @@ namespace TTRPG_Helper.Classes
 		private int characterId, strength, constitution, dexterity, wisdom, intelligence, charisma, maxHealth, speed, health, armorClass;
 		private bool isMonster;
 		private string name, race;
-		CharacterLINQDataContext characterbase;
-		Character character;
+		public CharacterLINQDataContext characterbase;
+		public Character character;
 
 
 		public Being(int id, int str, int con, int dex, int wis, int intel, int cha, int max, int spd, int hlt, bool mon, string nme, string rce, int ac)
@@ -165,7 +165,7 @@ namespace TTRPG_Helper.Classes
 			{
 				foreach(Character character2 in characterbase.Characters)
 				{
-					if(characterId == character.Id)
+					if(characterId == character2.Id)
 					{
 						character2.Strength = strength;
 						character2.Speed = speed;
@@ -180,6 +180,7 @@ namespace TTRPG_Helper.Classes
 						character2.CharacterName = name;
 						character2.Race = race;
 						character2.Monster = isMonster;
+
 						characterbase.SubmitChanges();
 						return;
 					}

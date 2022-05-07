@@ -97,11 +97,23 @@
     <Compile Include="Forms\CharacterSheetForm.Designer.cs">
       <DependentUpon>CharacterSheetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ConfirmDeleteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfirmDeleteForm.Designer.cs">
+      <DependentUpon>ConfirmDeleteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DMForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\DMForm.Designer.cs">
       <DependentUpon>DMForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ManageCharacterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManageCharacterForm.Designer.cs">
+      <DependentUpon>ManageCharacterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\NewCharacterForm.cs">
       <SubType>Form</SubType>
@@ -117,8 +129,14 @@
     <EmbeddedResource Include="Forms\CharacterSheetForm.resx">
       <DependentUpon>CharacterSheetForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfirmDeleteForm.resx">
+      <DependentUpon>ConfirmDeleteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DMForm.resx">
       <DependentUpon>DMForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManageCharacterForm.resx">
+      <DependentUpon>ManageCharacterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewCharacterForm.resx">
       <DependentUpon>NewCharacterForm.cs</DependentUpon>

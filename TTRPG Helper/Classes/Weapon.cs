@@ -10,24 +10,12 @@ namespace TTRPG_Helper.Classes
 {
 	class Weapon : Object
 	{
-		private int itemId, ownerId, quantity, diceSize, diceAmount;
-		private string itemName, itemType;
-		private decimal cost;
-		private Item item;
-		private ItemLINQDataContext itembase;
+		private int diceSize, diceAmount;
 
 		public Weapon(int id, int own, int quan, string name, string type, decimal cst, int dice, int size) : base(id, own, quan, name, type, cst)
 		{
 			diceSize = size;
 			diceAmount = dice;
-			itemId = id;
-			ownerId = own;
-			quantity = quan;
-			itemName = name;
-			itemType = type;
-			cost = cst;
-			item = new Item();
-			itembase = new ItemLINQDataContext();
 		}
 
 		public int getDiceAmount()
@@ -54,7 +42,7 @@ namespace TTRPG_Helper.Classes
 			{
 				foreach(Item item2 in itembase.Items)
 				{
-					if(item2.Id == itemId)
+					if(item2.Id == this.getId())
 					{
 						item2.AttackDiceAmount = diceAmount;
 						item2.AttackDiceSize = diceSize;
@@ -72,11 +60,11 @@ namespace TTRPG_Helper.Classes
 		{
 			try
 			{
-				item.Cost = cost;
-				item.OwnerId = ownerId;
-				item.ItemName = itemName;
-				item.ItemType = itemType;
-				item.Quantity = quantity;
+				item.Cost = this.getCost();
+				item.OwnerId = this.getOwner();
+				item.ItemName = this.getName();
+				item.ItemType = this.getType();
+				item.Quantity = this.getAmount();
 				item.AttackDiceAmount = diceAmount;
 				item.AttackDiceSize = diceSize;
 				itembase.Items.InsertOnSubmit(item);

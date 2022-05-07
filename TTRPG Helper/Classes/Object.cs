@@ -13,8 +13,8 @@ namespace TTRPG_Helper.Classes
 		private int itemId, ownerId, quantity;
 		private string itemName, itemType;
 		private decimal cost;
-		private Item item;
-		private ItemLINQDataContext itembase;
+		public Item item;
+		public ItemLINQDataContext itembase;
 		
 		public Object(int id, int own, int quan, string name, string type, decimal cst)
 		{

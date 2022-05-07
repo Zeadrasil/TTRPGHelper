@@ -10,12 +10,6 @@ namespace TTRPG_Helper.Classes
 {
 	public class Player : Being
 	{
-		private int characterId, strength, constitution, dexterity, wisdom, intelligence, charisma, maxHealth, speed, health, armorClass;
-		private bool isMonster;
-		private string name, race;
-		CharacterLINQDataContext characterbase;
-		Character character;
-
 		private int level, experience;
 		private string playerClass;
 		private decimal money;
@@ -29,22 +23,6 @@ namespace TTRPG_Helper.Classes
 			playerClass = cls;
 			money = mny;
 			isPlayer = ply;
-			characterId = id;
-			strength = str;
-			constitution = con;
-			dexterity = dex;
-			wisdom = wis;
-			intelligence = intel;
-			charisma = cha;
-			maxHealth = max;
-			speed = spd;
-			health = hlt;
-			isMonster = mon;
-			name = nme;
-			race = rce;
-			armorClass = ac;
-			characterbase = new CharacterLINQDataContext();
-			character = new Character();
 		}
 
 		public int getLevel()
@@ -96,9 +74,9 @@ namespace TTRPG_Helper.Classes
 		{
 			try
 			{
-				foreach(Character character2 in characterbase.Characters)
+				foreach (Character character2 in characterbase.Characters)
 				{
-					if(character2.Id == characterId)
+					if (character2.Id == getId())
 					{
 						character2.Level = level;
 						character2.Money = money;
@@ -125,8 +103,8 @@ namespace TTRPG_Helper.Classes
 				character.Class = playerClass;
 				character.Experience = experience;
 				character.PlayerCharacter = isPlayer;
-				character.CharacterName = name;
-				character.Race = race;
+				character.CharacterName = this.getName();
+				character.Race = this.getRace();
 				characterbase.Characters.InsertOnSubmit(character);
 				characterbase.SubmitChanges();
 				this.trySave();

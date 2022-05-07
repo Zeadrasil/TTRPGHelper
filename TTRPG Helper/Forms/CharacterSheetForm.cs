@@ -18,6 +18,7 @@ namespace TTRPG_Helper.Forms
         Player player;
         ItemLINQDataContext itembase;
         SpellLINQDataContext spellbase;
+        CharacterLINQDataContext bonusbase;
         public CharacterSheetForm(bool isDM, Player playerInfo)
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace TTRPG_Helper.Forms
             player = playerInfo;
             itembase = new ItemLINQDataContext();
             spellbase = new SpellLINQDataContext();
+            bonusbase = new CharacterLINQDataContext();
         }
 
         private void resetData()
@@ -33,6 +35,7 @@ namespace TTRPG_Helper.Forms
             {
                 spellListBox.Items.Clear();
                 itemListBox.Items.Clear();
+                bonusesListBox.Items.Clear();
                 List<Armor> armorsList = new List<Armor>();
                 List<Weapon> weaponsList = new List<Weapon>();
                 List<Classes.Object> objectsList = new List<Classes.Object>();
@@ -187,6 +190,15 @@ namespace TTRPG_Helper.Forms
                 {
                     spellListBox.Items.Add(spell.getName());
                 }
+
+
+                foreach(Bonuses bonus in bonusbase.Bonuses)
+                {
+                    if(bonus.CharacterId == player.getId())
+                    {
+                        bonusesListBox.Items.Add(bonus.Effect);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -277,6 +289,61 @@ namespace TTRPG_Helper.Forms
                 MessageBox.Show(ex.Message);
             }
             return 0;
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void characterButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ManageCharacterForm mcf = new ManageCharacterForm(player);
+                this.Hide();
+                mcf.ShowDialog();
+                if (player.getId() == -1)
+                {
+                    this.Close();
+                }
+                this.Show();
+                reloadData();
+                resetData();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void reloadData()
+        {
+            try
+            {
+
+                foreach (Character character in bonusbase.Characters)
+                {
+                    if (character.Id == player.getId())
+                    {
+                        player = new Player(character.Id, character.Strength, character.Constitution, character.Dexterity,
+                            character.Wisdom, character.Intelligence, character.Charisma, character.MaxHealth, character.Speed,
+                            character.Health, false, character.CharacterName, character.Race, character.ArmorClass,
+                            character.Level, character.Experience, character.Class, character.Money, true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

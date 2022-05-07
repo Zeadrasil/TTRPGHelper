@@ -69,6 +69,14 @@ namespace TTRPG_Helper.Forms
             this.itemListBox = new System.Windows.Forms.ListBox();
             this.spellListBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.inventoryButton = new System.Windows.Forms.Button();
+            this.spellsButton = new System.Windows.Forms.Button();
+            this.bonusesButton = new System.Windows.Forms.Button();
+            this.bonusesListBox = new System.Windows.Forms.ListBox();
+            this.bonusesLabel = new System.Windows.Forms.Label();
+            this.characterButton = new System.Windows.Forms.Button();
+            this.attackButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // strengthStatDisplay
@@ -452,34 +460,117 @@ namespace TTRPG_Helper.Forms
             this.itemListBox.Location = new System.Drawing.Point(525, 36);
             this.itemListBox.Name = "itemListBox";
             this.itemListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.itemListBox.Size = new System.Drawing.Size(263, 147);
+            this.itemListBox.Size = new System.Drawing.Size(263, 95);
             this.itemListBox.TabIndex = 37;
             this.itemListBox.TabStop = false;
             // 
             // spellListBox
             // 
             this.spellListBox.FormattingEnabled = true;
-            this.spellListBox.Location = new System.Drawing.Point(525, 229);
+            this.spellListBox.Location = new System.Drawing.Point(525, 160);
             this.spellListBox.Name = "spellListBox";
             this.spellListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.spellListBox.Size = new System.Drawing.Size(263, 147);
+            this.spellListBox.Size = new System.Drawing.Size(263, 95);
             this.spellListBox.TabIndex = 39;
             this.spellListBox.TabStop = false;
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(521, 202);
+            this.label2.Location = new System.Drawing.Point(521, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 23);
             this.label2.TabIndex = 38;
             this.label2.Text = "Spells:";
+            // 
+            // inventoryButton
+            // 
+            this.inventoryButton.Location = new System.Drawing.Point(25, 383);
+            this.inventoryButton.Name = "inventoryButton";
+            this.inventoryButton.Size = new System.Drawing.Size(75, 55);
+            this.inventoryButton.TabIndex = 40;
+            this.inventoryButton.Text = "Manage Inventory";
+            this.inventoryButton.UseVisualStyleBackColor = true;
+            // 
+            // spellsButton
+            // 
+            this.spellsButton.Location = new System.Drawing.Point(106, 383);
+            this.spellsButton.Name = "spellsButton";
+            this.spellsButton.Size = new System.Drawing.Size(75, 55);
+            this.spellsButton.TabIndex = 41;
+            this.spellsButton.Text = "Manage Spells";
+            this.spellsButton.UseVisualStyleBackColor = true;
+            // 
+            // bonusesButton
+            // 
+            this.bonusesButton.Location = new System.Drawing.Point(187, 383);
+            this.bonusesButton.Name = "bonusesButton";
+            this.bonusesButton.Size = new System.Drawing.Size(75, 55);
+            this.bonusesButton.TabIndex = 42;
+            this.bonusesButton.Text = "Manage Bonuses";
+            this.bonusesButton.UseVisualStyleBackColor = true;
+            // 
+            // bonusesListBox
+            // 
+            this.bonusesListBox.FormattingEnabled = true;
+            this.bonusesListBox.Location = new System.Drawing.Point(525, 284);
+            this.bonusesListBox.Name = "bonusesListBox";
+            this.bonusesListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.bonusesListBox.Size = new System.Drawing.Size(263, 95);
+            this.bonusesListBox.TabIndex = 44;
+            this.bonusesListBox.TabStop = false;
+            // 
+            // bonusesLabel
+            // 
+            this.bonusesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bonusesLabel.Location = new System.Drawing.Point(521, 258);
+            this.bonusesLabel.Name = "bonusesLabel";
+            this.bonusesLabel.Size = new System.Drawing.Size(122, 23);
+            this.bonusesLabel.TabIndex = 43;
+            this.bonusesLabel.Text = "Bonuses:";
+            // 
+            // characterButton
+            // 
+            this.characterButton.Location = new System.Drawing.Point(268, 383);
+            this.characterButton.Name = "characterButton";
+            this.characterButton.Size = new System.Drawing.Size(75, 55);
+            this.characterButton.TabIndex = 45;
+            this.characterButton.Text = "Manage Character";
+            this.characterButton.UseVisualStyleBackColor = true;
+            this.characterButton.Click += new System.EventHandler(this.characterButton_Click);
+            // 
+            // attackButton
+            // 
+            this.attackButton.Location = new System.Drawing.Point(349, 383);
+            this.attackButton.Name = "attackButton";
+            this.attackButton.Size = new System.Drawing.Size(75, 55);
+            this.attackButton.TabIndex = 46;
+            this.attackButton.Text = "Attack";
+            this.attackButton.UseVisualStyleBackColor = true;
+            // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(713, 385);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 55);
+            this.backButton.TabIndex = 47;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // CharacterSheetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.attackButton);
+            this.Controls.Add(this.characterButton);
+            this.Controls.Add(this.bonusesListBox);
+            this.Controls.Add(this.bonusesLabel);
+            this.Controls.Add(this.bonusesButton);
+            this.Controls.Add(this.spellsButton);
+            this.Controls.Add(this.inventoryButton);
             this.Controls.Add(this.spellListBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.itemListBox);
@@ -570,5 +661,13 @@ namespace TTRPG_Helper.Forms
         private System.Windows.Forms.ListBox itemListBox;
         private System.Windows.Forms.ListBox spellListBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button inventoryButton;
+        private System.Windows.Forms.Button spellsButton;
+        private System.Windows.Forms.Button bonusesButton;
+        private System.Windows.Forms.ListBox bonusesListBox;
+        private System.Windows.Forms.Label bonusesLabel;
+        private System.Windows.Forms.Button characterButton;
+        private System.Windows.Forms.Button attackButton;
+        private System.Windows.Forms.Button backButton;
     }
 }
