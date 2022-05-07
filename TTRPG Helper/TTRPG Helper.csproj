@@ -115,6 +115,18 @@
     <Compile Include="Forms\ManageCharacterForm.Designer.cs">
       <DependentUpon>ManageCharacterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ManageMonsterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManageMonsterForm.Designer.cs">
+      <DependentUpon>ManageMonsterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MonsterSheetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MonsterSheetForm.Designer.cs">
+      <DependentUpon>MonsterSheetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NewCharacterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +149,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManageCharacterForm.resx">
       <DependentUpon>ManageCharacterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManageMonsterForm.resx">
+      <DependentUpon>ManageMonsterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MonsterSheetForm.resx">
+      <DependentUpon>MonsterSheetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewCharacterForm.resx">
       <DependentUpon>NewCharacterForm.cs</DependentUpon>

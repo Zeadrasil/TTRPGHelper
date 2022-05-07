@@ -39,7 +39,7 @@ namespace TTRPG_Helper
         {
 			try
             {
-				this.Close();
+				Close();
 			}
 			catch (Exception ex)
 			{
@@ -52,9 +52,9 @@ namespace TTRPG_Helper
 			try
 			{
 				DMForm dmf = new DMForm();
-				this.Hide();
+				Hide();
 				dmf.ShowDialog();
-				this.Show();
+				Show();
 				resetCharacterList();
 			}
 			catch (Exception ex)
@@ -68,9 +68,9 @@ namespace TTRPG_Helper
 			try
 			{
 				NewCharacterForm ncf = new NewCharacterForm(false);
-				this.Hide();
+				Hide();
 				ncf.ShowDialog();
-				this.Show();
+				Show();
 				resetCharacterList();
 			}
 			catch (Exception ex)
@@ -89,10 +89,10 @@ namespace TTRPG_Helper
 					playerListBox.Focus();
 					return;
                 }
-				CharacterSheetForm csf = new CharacterSheetForm(false, characterList[playerListBox.SelectedIndex]);
-				this.Hide();
+				CharacterSheetForm csf = new CharacterSheetForm(characterList[playerListBox.SelectedIndex]);
+				Hide();
 				csf.ShowDialog();
-				this.Show();
+				Show();
 				resetCharacterList();
 			}
 			catch (Exception ex)

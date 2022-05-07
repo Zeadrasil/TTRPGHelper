@@ -25,7 +25,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {

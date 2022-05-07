@@ -84,7 +84,7 @@ namespace TTRPG_Helper.Classes
 						character2.Experience = experience;
 						character2.PlayerCharacter = isPlayer;
 						characterbase.SubmitChanges();
-						this.trySave();
+						trySave();
 						return;
 					}
 				}
@@ -103,11 +103,11 @@ namespace TTRPG_Helper.Classes
 				character.Class = playerClass;
 				character.Experience = experience;
 				character.PlayerCharacter = isPlayer;
-				character.CharacterName = this.getName();
-				character.Race = this.getRace();
+				character.CharacterName = getName();
+				character.Race = getRace();
 				characterbase.Characters.InsertOnSubmit(character);
 				characterbase.SubmitChanges();
-				this.trySave();
+				trySave();
 			}
 			catch(Exception ex)
 			{

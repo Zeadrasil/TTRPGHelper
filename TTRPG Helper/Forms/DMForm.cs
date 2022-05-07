@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TTRPG_Helper.Classes;
 using TTRPG_Helper.Database_Files;
+using TTRPG_Helper.Forms;
 
 namespace TTRPG_Helper.Forms
 {
     public partial class DMForm : Form
     {
         List<Being> characterList;
+        List<Player> playerList;
         CharacterLINQDataContext characterbase;
         
         public DMForm()
@@ -36,7 +38,31 @@ namespace TTRPG_Helper.Forms
 
         private void selectCharacterButton_Click(object sender, EventArgs e)
         {
+            if(characterListBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a character");
+                characterListBox.Focus();
+                return;
+            }
 
+            foreach (Player player in playerList)
+            {
+                if (player.getId() == characterList[characterListBox.SelectedIndex].getId())
+                {
+                    CharacterSheetForm csf = new CharacterSheetForm(player);
+                    Hide();
+                    csf.ShowDialog();
+                    Show();
+                    resetCharacterList();
+                    return;
+                }
+            }
+
+            MonsterSheetForm msf = new MonsterSheetForm(characterList[characterListBox.SelectedIndex]);
+            Hide();
+            msf.ShowDialog();
+            Show();
+            resetCharacterList();
         }
 
         private void newCharacterButton_Click(object sender, EventArgs e)
@@ -44,9 +70,9 @@ namespace TTRPG_Helper.Forms
             try
             {
                 NewCharacterForm ncf = new NewCharacterForm(true);
-                this.Hide();
+                Hide();
                 ncf.ShowDialog();
-                this.Show();
+                Show();
                 resetCharacterList();
             }
             catch (Exception ex)
@@ -60,7 +86,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -74,6 +100,7 @@ namespace TTRPG_Helper.Forms
             {
                 characterbase = new CharacterLINQDataContext();
                 characterList = new List<Being>();
+                playerList = new List<Player>();
                 characterListBox.Items.Clear();
 
                 foreach (Character character in characterbase.Characters)
@@ -87,6 +114,7 @@ namespace TTRPG_Helper.Forms
                             character.Health, false, character.CharacterName, character.Race, character.ArmorClass,
                             character.Level, character.Experience, character.Class, character.Money, true);
                         characterList.Add(player);
+                        playerList.Add(player);
                     }
                     else if (!character.Monster)
                     {
@@ -106,6 +134,7 @@ namespace TTRPG_Helper.Forms
                             character.Health, false, character.CharacterName, character.Race, character.ArmorClass,
                             character.Level, character.Experience, character.Class, character.Money, true);
                         characterList.Add(player);
+                        playerList.Add(player);
                     }
                     else
                     {

@@ -42,12 +42,12 @@ namespace TTRPG_Helper.Classes
 			{
 				foreach(Item item2 in itembase.Items)
 				{
-					if(item2.Id == this.getId())
+					if(item2.Id == getId())
 					{
 						item2.AttackDiceAmount = diceAmount;
 						item2.AttackDiceSize = diceSize;
 						itembase.SubmitChanges();
-						this.trySave();
+						trySave();
 					}
 				}
 			}
@@ -60,11 +60,11 @@ namespace TTRPG_Helper.Classes
 		{
 			try
 			{
-				item.Cost = this.getCost();
-				item.OwnerId = this.getOwner();
-				item.ItemName = this.getName();
-				item.ItemType = this.getType();
-				item.Quantity = this.getAmount();
+				item.Cost = getCost();
+				item.OwnerId = getOwner();
+				item.ItemName = getName();
+				item.ItemType = getType();
+				item.Quantity = getAmount();
 				item.AttackDiceAmount = diceAmount;
 				item.AttackDiceSize = diceSize;
 				itembase.Items.InsertOnSubmit(item);

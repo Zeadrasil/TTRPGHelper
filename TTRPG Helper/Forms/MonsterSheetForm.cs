@@ -12,19 +12,32 @@ using TTRPG_Helper.Database_Files;
 
 namespace TTRPG_Helper.Forms
 {
-    public partial class CharacterSheetForm : Form
+    public partial class MonsterSheetForm : Form
     {
-        Player player;
+        Being being;
         ItemLINQDataContext itembase;
         SpellLINQDataContext spellbase;
         CharacterLINQDataContext bonusbase;
-        public CharacterSheetForm(Player playerInfo)
+        public MonsterSheetForm(Being temp)
         {
             InitializeComponent();
-            player = playerInfo;
+            being = temp;
             itembase = new ItemLINQDataContext();
             spellbase = new SpellLINQDataContext();
             bonusbase = new CharacterLINQDataContext();
+            resetData();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void resetData()
@@ -41,88 +54,84 @@ namespace TTRPG_Helper.Forms
                 List<Spell> otherSpellsList = new List<Spell>();
 
 
-                strengthStatDisplay.Text = player.getStrength().ToString();
-                constitutionStatDisplay.Text = player.getConstitution().ToString();
-                dexterityStatDisplay.Text = player.getDexterity().ToString();
-                wisdomStatDisplay.Text = player.getWisdom().ToString();
-                intelligenceStatDisplay.Text = player.getIntelligence().ToString();
-                charismaStatDisplay.Text = player.getCharisma().ToString();
+                strengthStatDisplay.Text = being.getStrength().ToString();
+                constitutionStatDisplay.Text = being.getConstitution().ToString();
+                dexterityStatDisplay.Text = being.getDexterity().ToString();
+                wisdomStatDisplay.Text = being.getWisdom().ToString();
+                intelligenceStatDisplay.Text = being.getIntelligence().ToString();
+                charismaStatDisplay.Text = being.getCharisma().ToString();
 
 
-                if(getModifier(player.getStrength()) < 0)
+                if (getModifier(being.getStrength()) < 0)
                 {
-                    strengthModDisplay.Text = getModifier(player.getStrength()).ToString();
+                    strengthModDisplay.Text = getModifier(being.getStrength()).ToString();
                 }
                 else
                 {
-                    strengthModDisplay.Text = "+" + getModifier(player.getStrength()).ToString();
+                    strengthModDisplay.Text = "+" + getModifier(being.getStrength()).ToString();
                 }
 
-                if (getModifier(player.getConstitution()) < 0)
+                if (getModifier(being.getConstitution()) < 0)
                 {
-                    constitutionModDisplay.Text = getModifier(player.getConstitution()).ToString();
+                    constitutionModDisplay.Text = getModifier(being.getConstitution()).ToString();
                 }
                 else
                 {
-                    constitutionModDisplay.Text = "+" + getModifier(player.getConstitution()).ToString();
+                    constitutionModDisplay.Text = "+" + getModifier(being.getConstitution()).ToString();
                 }
 
-                if (getModifier(player.getDexterity()) < 0)
+                if (getModifier(being.getDexterity()) < 0)
                 {
-                    dexterityModDisplay.Text = getModifier(player.getDexterity()).ToString();
+                    dexterityModDisplay.Text = getModifier(being.getDexterity()).ToString();
                 }
                 else
                 {
-                    dexterityModDisplay.Text = "+" + getModifier(player.getDexterity()).ToString();
+                    dexterityModDisplay.Text = "+" + getModifier(being.getDexterity()).ToString();
                 }
 
-                if (getModifier(player.getWisdom()) < 0)
+                if (getModifier(being.getWisdom()) < 0)
                 {
-                    wisdomModDisplay.Text = getModifier(player.getWisdom()).ToString();
+                    wisdomModDisplay.Text = getModifier(being.getWisdom()).ToString();
                 }
                 else
                 {
-                    wisdomModDisplay.Text = "+" + getModifier(player.getWisdom()).ToString();
+                    wisdomModDisplay.Text = "+" + getModifier(being.getWisdom()).ToString();
                 }
 
-                if (getModifier(player.getIntelligence()) < 0)
+                if (getModifier(being.getIntelligence()) < 0)
                 {
-                    intelligenceModDisplay.Text = getModifier(player.getIntelligence()).ToString();
+                    intelligenceModDisplay.Text = getModifier(being.getIntelligence()).ToString();
                 }
                 else
                 {
-                    intelligenceModDisplay.Text = "+" + getModifier(player.getIntelligence()).ToString();
+                    intelligenceModDisplay.Text = "+" + getModifier(being.getIntelligence()).ToString();
                 }
 
-                if (getModifier(player.getCharisma()) < 0)
+                if (getModifier(being.getCharisma()) < 0)
                 {
-                    charismaModDisplay.Text = getModifier(player.getCharisma()).ToString();
+                    charismaModDisplay.Text = getModifier(being.getCharisma()).ToString();
                 }
                 else
                 {
-                    charismaModDisplay.Text = "+" + getModifier(player.getCharisma()).ToString();
+                    charismaModDisplay.Text = "+" + getModifier(being.getCharisma()).ToString();
                 }
 
-                healthDisplay.Text = player.getHealth().ToString() + "/" + player.getMaxHealth().ToString();
-                speedDisplay.Text = player.getSpeed().ToString();
-                armorClassDisplay.Text = player.getArmorClass().ToString();
-                levelDisplay.Text = player.getLevel().ToString();
-                experienceDisplay.Text = player.getXP().ToString();
-                moneyDisplay.Text = string.Format("{0:C}", player.getMoney());
-                nameDisplay.Text = player.getName();
-                raceDisplay.Text = player.getRace();
-                classDisplay.Text = player.getPlayerClass();
+                healthDisplay.Text = being.getHealth().ToString() + "/" + being.getMaxHealth().ToString();
+                speedDisplay.Text = being.getSpeed().ToString();
+                armorClassDisplay.Text = being.getArmorClass().ToString();
+                nameDisplay.Text = being.getName();
+                raceDisplay.Text = being.getRace();
 
-                foreach(Item item in itembase.Items)
+                foreach (Item item in itembase.Items)
                 {
-                    if(item.OwnerId == player.getId())
+                    if (item.OwnerId == being.getId())
                     {
-                        if(item.ArmorClassProvided != null && item.ArmorClassProvided != 0)
+                        if (item.ArmorClassProvided != null && item.ArmorClassProvided != 0)
                         {
-                            armorsList.Add(new Armor(item.Id, item.OwnerId, item.Quantity ?? default(int), item.ItemName, item.ItemType, 
+                            armorsList.Add(new Armor(item.Id, item.OwnerId, item.Quantity ?? default(int), item.ItemName, item.ItemType,
                                 item.Cost, item.ArmorClassProvided ?? default(int)));
                         }
-                        else if(item.AttackDiceAmount != null && item.AttackDiceAmount != 0 && item.AttackDiceSize != 0)
+                        else if (item.AttackDiceAmount != null && item.AttackDiceAmount != 0 && item.AttackDiceSize != 0)
                         {
                             weaponsList.Add(new Weapon(item.Id, item.OwnerId, item.Quantity ?? default(int), item.ItemName, item.ItemType,
                                 item.Cost, item.AttackDiceAmount ?? default(int), item.AttackDiceSize ?? default(int)));
@@ -136,9 +145,9 @@ namespace TTRPG_Helper.Forms
                 }
 
                 itemListBox.Items.Add("Armor:");
-                foreach(Armor armor in armorsList)
+                foreach (Armor armor in armorsList)
                 {
-                    itemListBox.Items.Add(string.Format(armor.getAmount().ToString() + " " + armor.getName() + " (" + armor.getType() 
+                    itemListBox.Items.Add(string.Format(armor.getAmount().ToString() + " " + armor.getName() + " (" + armor.getType()
                         + ") providing " + armor.getArmorClass().ToString() + " worth {0:C}", armor.getCost()));
                 }
 
@@ -146,8 +155,8 @@ namespace TTRPG_Helper.Forms
                 itemListBox.Items.Add("Weapons:");
                 foreach (Weapon weapon in weaponsList)
                 {
-                    itemListBox.Items.Add(string.Format(weapon.getAmount().ToString() + " " + weapon.getName() + " (" + 
-                        weapon.getType() + ") providing " + weapon.getDiceAmount().ToString() + "d" + 
+                    itemListBox.Items.Add(string.Format(weapon.getAmount().ToString() + " " + weapon.getName() + " (" +
+                        weapon.getType() + ") providing " + weapon.getDiceAmount().ToString() + "d" +
                         weapon.getDiceSize().ToString() + " damage worth {0:C}", weapon.getCost()));
                 }
 
@@ -155,16 +164,16 @@ namespace TTRPG_Helper.Forms
                 itemListBox.Items.Add("Other:");
                 foreach (Classes.Object item in objectsList)
                 {
-                    itemListBox.Items.Add(string.Format(item.getAmount().ToString() + " " + item.getName() + " (" 
+                    itemListBox.Items.Add(string.Format(item.getAmount().ToString() + " " + item.getName() + " ("
                         + item.getType() + " worth {0:C}", item.getCost()));
                 }
 
 
-                foreach(PreparedSpell spell in spellbase.PreparedSpells)
+                foreach (PreparedSpell spell in spellbase.PreparedSpells)
                 {
-                    if(spell.CharacterId == player.getId())
+                    if (spell.CharacterId == being.getId())
                     {
-                        if(spell.DiceAmount != 0 && spell.DiceSize != 0)
+                        if (spell.DiceAmount != 0 && spell.DiceSize != 0)
                         {
                             attackSpellsList.Add(new Spell(spell.Id, spell.CharacterId, spell.DiceAmount, spell.DiceSize, spell.SpellName));
                         }
@@ -176,7 +185,7 @@ namespace TTRPG_Helper.Forms
                 }
 
                 spellListBox.Items.Add("Attack Spells:");
-                foreach(Spell spell in attackSpellsList)
+                foreach (Spell spell in attackSpellsList)
                 {
                     spellListBox.Items.Add(spell.getName() + " dealing " + spell.getDiceAmount().ToString() +
                         "d" + spell.getDiceSize().ToString() + "damage");
@@ -184,33 +193,21 @@ namespace TTRPG_Helper.Forms
 
                 spellListBox.Items.Add("");
                 spellListBox.Items.Add("Other Spells:");
-                foreach(Spell spell in otherSpellsList)
+                foreach (Spell spell in otherSpellsList)
                 {
                     spellListBox.Items.Add(spell.getName());
                 }
 
 
-                foreach(Bonuses bonus in bonusbase.Bonuses)
+                foreach (Bonuses bonus in bonusbase.Bonuses)
                 {
-                    if(bonus.CharacterId == player.getId())
+                    if (bonus.CharacterId == being.getId())
                     {
                         bonusesListBox.Items.Add(bonus.Effect);
                     }
                 }
             }
             catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void CharacterSheetForm_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                resetData();
-            }
-            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -289,26 +286,14 @@ namespace TTRPG_Helper.Forms
             return 0;
         }
 
-        private void backButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void characterButton_Click(object sender, EventArgs e)
         {
             try
             {
-                ManageCharacterForm mcf = new ManageCharacterForm(player);
+                ManageMonsterForm mcf = new ManageMonsterForm(being);
                 this.Hide();
                 mcf.ShowDialog();
-                if (player.getId() == -1)
+                if (being.getId() == -1)
                 {
                     this.Close();
                 }
@@ -316,7 +301,7 @@ namespace TTRPG_Helper.Forms
                 reloadData();
                 resetData();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -329,12 +314,11 @@ namespace TTRPG_Helper.Forms
 
                 foreach (Character character in bonusbase.Characters)
                 {
-                    if (character.Id == player.getId())
+                    if (character.Id == being.getId())
                     {
-                        player = new Player(character.Id, character.Strength, character.Constitution, character.Dexterity,
+                        being = new Being(character.Id, character.Strength, character.Constitution, character.Dexterity,
                             character.Wisdom, character.Intelligence, character.Charisma, character.MaxHealth, character.Speed,
-                            character.Health, false, character.CharacterName, character.Race, character.ArmorClass,
-                            character.Level, character.Experience, character.Class, character.Money, true);
+                            character.Health, false, character.CharacterName, character.Race, character.ArmorClass);
                     }
                 }
             }

@@ -8,36 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TTRPG_Helper.Classes;
-using TTRPG_Helper.Database_Files;
 
 namespace TTRPG_Helper.Forms
 {
-    public partial class ManageCharacterForm : Form
+    public partial class ManageMonsterForm : Form
     {
-        Player player;
-        CharacterLINQDataContext npcbase;
-        public ManageCharacterForm(Player playerData)
+        Being being;
+        public ManageMonsterForm(Being temp)
         {
             InitializeComponent();
-            player = playerData;
-            npcbase = new CharacterLINQDataContext();
-        }
-
-        private void deleteCharacterButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ConfirmDeleteForm cdf = new ConfirmDeleteForm(player);
-                cdf.ShowDialog();
-                if (player.getId() == -1)
-                {
-                    Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            being = temp;
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -52,56 +32,15 @@ namespace TTRPG_Helper.Forms
             }
         }
 
-        private void savePlayerButton_Click(object sender, EventArgs e)
+        private void deleteCharacterButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (checkStats())
+                ConfirmDeleteForm cdf = new ConfirmDeleteForm(being);
+                cdf.ShowDialog();
+                if (being.getId() == -1)
                 {
-                    int tempHolder;
-                    if (!int.TryParse(levelTextBox.Text, out tempHolder) || tempHolder < 1)
-                    {
-                        MessageBox.Show("Level value is invalid, please enter an integer of at least 1");
-                        levelTextBox.Focus();
-                        return;
-                    }
-
-                    if (!int.TryParse(armorClassTextBox.Text, out tempHolder) || tempHolder < 0)
-                    {
-                        MessageBox.Show("Armor class value is invalid, please enter an integer of at least 0");
-                        armorClassTextBox.Focus();
-                        return;
-                    }
-
-                    if (!int.TryParse(experienceTextBox.Text, out tempHolder) || tempHolder < 0)
-                    {
-                        MessageBox.Show("Experience value is invalid, please enter an integer of at least 0");
-                        experienceTextBox.Focus();
-                        return;
-                    }
-
-                    if (classTextBox.Text == "")
-                    {
-                        MessageBox.Show("Class value is empty, please enter a class");
-                        classTextBox.Focus();
-                        return;
-                    }
-
-                    decimal decTempHolder;
-                    if (!decimal.TryParse(moneyTextBox.Text, out decTempHolder) || decTempHolder < 0)
-                    {
-                        MessageBox.Show("Money value is invalid, please enter a decimal value of at least 0");
-                        moneyTextBox.Focus();
-                        return;
-                    }
-
-                    int idHolder = player.getId();
-                    player = new Player(idHolder, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
-                        int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
-                        int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text),
-                        int.Parse(healthTextBox.Text), false, nameTextBox.Text, raceTextBox.Text, int.Parse(armorClassTextBox.Text),
-                        int.Parse(levelTextBox.Text), tempHolder, classTextBox.Text, decTempHolder, true);
-                    player.tryCharacterSave();
+                    Close();
                 }
             }
             catch (Exception ex)
@@ -201,43 +140,51 @@ namespace TTRPG_Helper.Forms
             return false;
         }
 
-        private void ManageCharacterForm_Load(object sender, EventArgs e)
+        private void ManageMonsterForm_Load(object sender, EventArgs e)
         {
             try
             {
-                strengthTextBox.Text = player.getStrength().ToString();
-                constitutionTextBox.Text = player.getConstitution().ToString();
-                dexterityTextBox.Text = player.getDexterity().ToString();
-                wisdomTextBox.Text = player.getWisdom().ToString();
-                intelligenceTextBox.Text = player.getIntelligence().ToString();
-                charismaTextBox.Text = player.getCharisma().ToString();
+                strengthTextBox.Text = being.getStrength().ToString();
+                constitutionTextBox.Text = being.getConstitution().ToString();
+                dexterityTextBox.Text = being.getDexterity().ToString();
+                wisdomTextBox.Text = being.getWisdom().ToString();
+                intelligenceTextBox.Text = being.getIntelligence().ToString();
+                charismaTextBox.Text = being.getCharisma().ToString();
 
-                nameTextBox.Text = player.getName();
-                classTextBox.Text = player.getPlayerClass();
-                raceTextBox.Text = player.getRace();
-                speedTextBox.Text = player.getSpeed().ToString();
-                levelTextBox.Text = player.getLevel().ToString();
-                experienceTextBox.Text = player.getXP().ToString();
+                nameTextBox.Text = being.getName();
+                raceTextBox.Text = being.getRace();
+                speedTextBox.Text = being.getSpeed().ToString();
 
-                maxHealthTextBox.Text = player.getMaxHealth().ToString();
-                healthTextBox.Text = player.getHealth().ToString();
-                moneyTextBox.Text = Math.Round(player.getMoney(), 2).ToString();
-                armorClassTextBox.Text = player.getArmorClass().ToString();
+                maxHealthTextBox.Text = being.getMaxHealth().ToString();
+                healthTextBox.Text = being.getHealth().ToString();
+                armorClassTextBox.Text = being.getArmorClass().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-                if (!player.getIsPlayer())
+        private void savePlayerButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkStats())
                 {
-                    foreach (NPC npc in npcbase.NPCs)
+                    int tempHolder;
+                    if (!int.TryParse(armorClassTextBox.Text, out tempHolder) || tempHolder < 0)
                     {
-                        if (npc.CharacterId == player.getId())
-                        {
-                            occupationTextBox.Text = npc.Occupation;
-                            locationTextBox.Text = npc.Location;
-                            return;
-                        }
+                        MessageBox.Show("Armor class value is invalid, please enter an integer of at least 0");
+                        armorClassTextBox.Focus();
+                        return;
                     }
+                    int idHolder = being.getId();
+                    being = new Being(idHolder, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
+                        int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
+                        int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text),
+                        int.Parse(healthTextBox.Text), true, nameTextBox.Text, raceTextBox.Text, tempHolder);
+                    being.trySave();
                 }
-                occupationTextBox.Text = "N/A";
-                locationTextBox.Text = "N/A";
             }
             catch (Exception ex)
             {
