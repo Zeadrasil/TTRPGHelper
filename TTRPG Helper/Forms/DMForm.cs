@@ -26,10 +26,57 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                resetCharacterList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void selectCharacterButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void newCharacterButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NewCharacterForm ncf = new NewCharacterForm(true);
+                this.Hide();
+                ncf.ShowDialog();
+                this.Show();
+                resetCharacterList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void quitButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void resetCharacterList()
+        {
+            try
+            {
                 characterbase = new CharacterLINQDataContext();
                 characterList = new List<Being>();
+                characterListBox.Items.Clear();
 
-                foreach(Character character in characterbase.Characters)
+                foreach (Character character in characterbase.Characters)
                 {
                     if (character.PlayerCharacter)
                     {
@@ -41,12 +88,12 @@ namespace TTRPG_Helper.Forms
                             character.Level, character.Experience, character.Class, character.Money, true);
                         characterList.Add(player);
                     }
-                    else if(!character.Monster)
+                    else if (!character.Monster)
                     {
                         string occupation = "", location = "";
-                        foreach(NPC npc in characterbase.NPCs)
+                        foreach (NPC npc in characterbase.NPCs)
                         {
-                            if(npc.CharacterId == character.Id)
+                            if (npc.CharacterId == character.Id)
                             {
                                 occupation = npc.Occupation;
                                 location = npc.Location;
@@ -69,39 +116,6 @@ namespace TTRPG_Helper.Forms
                         characterList.Add(being);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void selectCharacterButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void newCharacterButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                NewCharacterForm ncf = new NewCharacterForm(true);
-                this.Hide();
-                ncf.ShowDialog();
-                this.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void quitButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.Close();
             }
             catch (Exception ex)
             {

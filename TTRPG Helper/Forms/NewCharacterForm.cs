@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TTRPG_Helper.Classes;
+using TTRPG_Helper.Database_Files;
 
 namespace TTRPG_Helper.Forms
 {
@@ -145,7 +146,7 @@ namespace TTRPG_Helper.Forms
 
                 if (!int.TryParse(speedTextBox.Text, out tempHolder) || tempHolder < 0 || (tempHolder % 5) != 0)
                 {
-                    MessageBox.Show("Speed value is invalid, please enter an integer between 1 and 20");
+                    MessageBox.Show("Speed value is invalid, please enter an integer above 0 that is a multiple of 5");
                     speedTextBox.Focus();
                     return false;
                 }
@@ -246,6 +247,82 @@ namespace TTRPG_Helper.Forms
             return 10;
         }
 
+        private void createNPCButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkStats())
+                {
+                    int tempHolder;
+                    if (!int.TryParse(levelTextBox.Text, out tempHolder) || tempHolder < 1)
+                    {
+                        MessageBox.Show("Level value is invalid, please enter an integer of at least 1");
+                        levelTextBox.Focus();
+                        return;
+                    }
 
+                    if (!int.TryParse(experienceTextBox.Text, out tempHolder) || tempHolder < 0)
+                    {
+                        MessageBox.Show("Experience value is invalid, please enter an integer of at least 0");
+                        experienceTextBox.Focus();
+                        return;
+                    }
+
+                    if (classTextBox.Text == "")
+                    {
+                        MessageBox.Show("Class value is empty, please enter a class");
+                        classTextBox.Focus();
+                        return;
+                    }
+
+                    if (occupationTextBox.Text == "")
+                    {
+                        MessageBox.Show("Occupation value is empty, please enter an occupation");
+                        occupationTextBox.Focus();
+                        return;
+                    }
+
+                    if (classTextBox.Text == "")
+                    {
+                        MessageBox.Show("Location value is empty, please enter a location");
+                        locationTextBox.Focus();
+                        return;
+                    }
+
+                    decimal decTempHolder;
+                    if (!decimal.TryParse(moneyTextBox.Text, out decTempHolder) || decTempHolder < 0)
+                    {
+                        MessageBox.Show("Money value is invalid, please enter a decimal value of at least 0");
+                        moneyTextBox.Focus();
+                        return;
+                    }
+
+                    Player playerStorage = new Player(-1, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
+                        int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
+                        int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text),
+                        int.Parse(healthTextBox.Text), false, nameTextBox.Text, raceTextBox.Text, getAC(),
+                        int.Parse(levelTextBox.Text), tempHolder, classTextBox.Text, decTempHolder, false);
+                    playerStorage.tryCharacterSaveAsNew();
+
+                    CharacterLINQDataContext npcbase = new CharacterLINQDataContext();
+                    NPC npc = new NPC();
+                    foreach(Character character in npcbase.Characters)
+                    {
+                        if(!character.PlayerCharacter)
+                        {
+                            npc.CharacterId = character.Id;
+                        }
+                    }
+                    npc.Occupation = occupationTextBox.Text;
+                    npc.Location = locationTextBox.Text;
+                    npcbase.NPCs.InsertOnSubmit(npc);
+                    npcbase.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

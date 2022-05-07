@@ -379,6 +379,7 @@ namespace TTRPG_Helper.Forms
             this.createNPCButton.TabIndex = 37;
             this.createNPCButton.Text = "Create NPC";
             this.createNPCButton.UseVisualStyleBackColor = true;
+            this.createNPCButton.Click += new System.EventHandler(this.createNPCButton_Click);
             // 
             // createMonsterButton
             // 
