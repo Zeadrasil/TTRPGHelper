@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Classes\Armor.cs" />
     <Compile Include="Classes\Being.cs" />
+    <Compile Include="Classes\Bonus.cs" />
     <Compile Include="Classes\Object.cs" />
     <Compile Include="Classes\Spell.cs" />
     <Compile Include="Classes\Weapon.cs" />
@@ -83,6 +84,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SpellLINQ.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BonusManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BonusManagementForm.Designer.cs">
+      <DependentUpon>BonusManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CharacterSelectForm.cs">
       <SubType>Form</SubType>
@@ -135,6 +142,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BonusManagementForm.resx">
+      <DependentUpon>BonusManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CharacterSelectForm.resx">
       <DependentUpon>CharacterSelectForm.cs</DependentUpon>
     </EmbeddedResource>

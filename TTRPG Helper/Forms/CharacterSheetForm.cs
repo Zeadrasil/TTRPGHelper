@@ -293,7 +293,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -306,13 +306,13 @@ namespace TTRPG_Helper.Forms
             try
             {
                 ManageCharacterForm mcf = new ManageCharacterForm(player);
-                this.Hide();
+                Hide();
                 mcf.ShowDialog();
                 if (player.getId() == -1)
                 {
-                    this.Close();
+                    Close();
                 }
-                this.Show();
+                Show();
                 reloadData();
                 resetData();
             }
@@ -337,6 +337,22 @@ namespace TTRPG_Helper.Forms
                             character.Level, character.Experience, character.Class, character.Money, true);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void bonusesButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BonusManagementForm bmf = new BonusManagementForm(player.getId(), player.getName());
+                Hide();
+                bmf.ShowDialog();
+                Show();
+                resetData();
             }
             catch (Exception ex)
             {

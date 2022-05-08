@@ -13,12 +13,22 @@ namespace TTRPG_Helper.Forms
 {
     public partial class ConfirmDeleteForm : Form
     {
-        Being toDelete;
+        Being beingDelete;
+        int deletetype;
+        Bonus bonusDelete;
 
         public ConfirmDeleteForm(Being being)
         {
             InitializeComponent();
-            toDelete = being;
+            beingDelete = being;
+            deletetype = 0;
+        }
+
+        public ConfirmDeleteForm(Bonus bonus)
+        {
+            InitializeComponent();
+            bonusDelete = bonus;
+            deletetype = 1;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -37,7 +47,24 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-                toDelete.tryDelete();
+                switch(deletetype)
+                {
+                    case 0:
+                        {
+                            beingDelete.tryDelete();
+                            break;
+                        }
+                    case 1:
+                        {
+                            bonusDelete.tryDelete();
+                            break;
+                        }
+                    default:
+                        {
+                            beingDelete.tryDelete();
+                            break;
+                        }
+                }
                 Close();
             }
             catch (Exception ex)

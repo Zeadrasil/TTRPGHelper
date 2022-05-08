@@ -39,9 +39,9 @@ namespace TTRPG_Helper.Forms
             this.quesitonLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quesitonLabel.Location = new System.Drawing.Point(13, 13);
             this.quesitonLabel.Name = "quesitonLabel";
-            this.quesitonLabel.Size = new System.Drawing.Size(357, 58);
+            this.quesitonLabel.Size = new System.Drawing.Size(318, 58);
             this.quesitonLabel.TabIndex = 0;
-            this.quesitonLabel.Text = "Are you sure you want to delete this character? This cannot be undone.";
+            this.quesitonLabel.Text = "Are you sure you want to delete this? This cannot be undone.";
             this.quesitonLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // deleteButton
@@ -58,7 +58,7 @@ namespace TTRPG_Helper.Forms
             // cancelButton
             // 
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(264, 74);
+            this.cancelButton.Location = new System.Drawing.Point(225, 74);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 48);
             this.cancelButton.TabIndex = 2;
@@ -66,15 +66,15 @@ namespace TTRPG_Helper.Forms
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // confirmDeleteDialog
+            // ConfirmDeleteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 135);
+            this.ClientSize = new System.Drawing.Size(343, 135);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.quesitonLabel);
-            this.Name = "confirmDeleteDialog";
+            this.Name = "ConfirmDeleteForm";
             this.Text = "confirmDeleteDialog";
             this.ResumeLayout(false);
 

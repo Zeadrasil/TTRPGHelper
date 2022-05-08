@@ -509,6 +509,7 @@ namespace TTRPG_Helper.Forms
             this.bonusesButton.TabIndex = 42;
             this.bonusesButton.Text = "Manage Bonuses";
             this.bonusesButton.UseVisualStyleBackColor = true;
+            this.bonusesButton.Click += new System.EventHandler(this.bonusesButton_Click);
             // 
             // bonusesListBox
             // 

@@ -327,5 +327,21 @@ namespace TTRPG_Helper.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void bonusesButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BonusManagementForm bmf = new BonusManagementForm(being.getId(), being.getName());
+                Hide();
+                bmf.ShowDialog();
+                resetData();
+                Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
