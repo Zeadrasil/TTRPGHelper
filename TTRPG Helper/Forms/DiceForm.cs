@@ -255,7 +255,7 @@ namespace TTRPG_Helper
         {
             try
             {
-                int cal = Int32.Parse(d20OutTB.Text) + Int32.Parse(d12OutTB.Text) + Int32.Parse(d10OutTB.Text) + Int32.Parse(d8OutTB.Text) + Int32.Parse(d6OutTB.Text) + Int32.Parse(d4OutTB.Text) + Int32.Parse(d100OutTB.Text);
+                int cal = Int32.Parse(d20OutTB.Text) + Int32.Parse(d12OutTB.Text) + Int32.Parse(d10OutTB.Text) + Int32.Parse(d8OutTB.Text) + Int32.Parse(d6OutTB.Text) + Int32.Parse(d4OutTB.Text) + Int32.Parse(d100OutTB.Text) + Int32.Parse(bonusTB.Text);
 
                 string total = "" + cal;
                 return total;
@@ -263,7 +263,7 @@ namespace TTRPG_Helper
             catch
             {
                 int total2 = 0;
-                MessageBox.Show("Please Select Die to roll!");
+                MessageBox.Show("Please Select Die to roll and make sure the the Bonus is filled");
                 return "" + total2;
             }
             

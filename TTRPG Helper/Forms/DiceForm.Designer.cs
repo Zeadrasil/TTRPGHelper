@@ -56,6 +56,8 @@ namespace TTRPG_Helper
             this.d10OutTB = new System.Windows.Forms.TextBox();
             this.d12OutTB = new System.Windows.Forms.TextBox();
             this.d20OutTB = new System.Windows.Forms.TextBox();
+            this.bonusLabel = new System.Windows.Forms.Label();
+            this.bonusTB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.d20PB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d100PB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4PB)).BeginInit();
@@ -323,11 +325,30 @@ namespace TTRPG_Helper
             this.d20OutTB.TabIndex = 19;
             this.d20OutTB.Text = "0";
             // 
+            // bonusLabel
+            // 
+            this.bonusLabel.AutoSize = true;
+            this.bonusLabel.Location = new System.Drawing.Point(58, 165);
+            this.bonusLabel.Name = "bonusLabel";
+            this.bonusLabel.Size = new System.Drawing.Size(40, 13);
+            this.bonusLabel.TabIndex = 27;
+            this.bonusLabel.Text = "Bonus:";
+            // 
+            // bonusTB
+            // 
+            this.bonusTB.Location = new System.Drawing.Point(98, 162);
+            this.bonusTB.Name = "bonusTB";
+            this.bonusTB.Size = new System.Drawing.Size(80, 20);
+            this.bonusTB.TabIndex = 26;
+            this.bonusTB.Text = "0";
+            // 
             // DiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 195);
+            this.Controls.Add(this.bonusLabel);
+            this.Controls.Add(this.bonusTB);
             this.Controls.Add(this.d100OutTB);
             this.Controls.Add(this.d4OutTB);
             this.Controls.Add(this.d6OutTB);
@@ -397,5 +418,7 @@ namespace TTRPG_Helper
         private System.Windows.Forms.TextBox d10OutTB;
         private System.Windows.Forms.TextBox d12OutTB;
         private System.Windows.Forms.TextBox d20OutTB;
+        private System.Windows.Forms.Label bonusLabel;
+        private System.Windows.Forms.TextBox bonusTB;
     }
 }
