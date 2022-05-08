@@ -343,5 +343,11 @@ namespace TTRPG_Helper.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void attackButton_Click(object sender, EventArgs e)
+        {
+            Form newForm = new DiceForm();
+            newForm.Show();
+        }
     }
 }

@@ -547,6 +547,7 @@ namespace TTRPG_Helper.Forms
             this.attackButton.TabIndex = 46;
             this.attackButton.Text = "Attack";
             this.attackButton.UseVisualStyleBackColor = true;
+            this.attackButton.Click += new System.EventHandler(this.attackButton_Click);
             // 
             // backButton
             // 
