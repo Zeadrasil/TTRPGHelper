@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/8/2022
+Description: form confirming that the user wants to delete something, which deletes the item if they do and does nothing if they do not*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +16,7 @@ namespace TTRPG_Helper.Forms
 {
     public partial class ConfirmDeleteForm : Form
     {
+        //storage for the item to be deleted and which type of item is being deleted
         Being beingDelete;
         int deletetype;
         Bonus bonusDelete;
@@ -47,6 +51,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //deletes the item that needs to be deleted
                 switch(deletetype)
                 {
                     case 0:

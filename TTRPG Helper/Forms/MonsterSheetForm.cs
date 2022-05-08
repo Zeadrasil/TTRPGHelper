@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ * Date: 5/8/2022
+ Description: form allowing DMs to see data about a monster that they have selected, which leads to forms where all aspects of the monster can be altered*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +17,10 @@ namespace TTRPG_Helper.Forms
 {
     public partial class MonsterSheetForm : Form
     {
+        //storage structure allowing for less database calls
         Being being;
+
+        //database access
         ItemLINQDataContext itembase;
         SpellLINQDataContext spellbase;
         CharacterLINQDataContext bonusbase;
@@ -44,6 +50,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //clears out all of the storage structures for the monster information
                 spellListBox.Items.Clear();
                 itemListBox.Items.Clear();
                 bonusesListBox.Items.Clear();
@@ -53,7 +60,7 @@ namespace TTRPG_Helper.Forms
                 List<Spell> attackSpellsList = new List<Spell>();
                 List<Spell> otherSpellsList = new List<Spell>();
 
-
+                //sets the texts of the stat displays to the appropriate value for each stat
                 strengthStatDisplay.Text = being.getStrength().ToString();
                 constitutionStatDisplay.Text = being.getConstitution().ToString();
                 dexterityStatDisplay.Text = being.getDexterity().ToString();
@@ -61,7 +68,7 @@ namespace TTRPG_Helper.Forms
                 intelligenceStatDisplay.Text = being.getIntelligence().ToString();
                 charismaStatDisplay.Text = being.getCharisma().ToString();
 
-
+                //goes through each stat then gets its modifier, then displays the modifier with the appropriate symbol in front of it
                 if (getModifier(being.getStrength()) < 0)
                 {
                     strengthModDisplay.Text = getModifier(being.getStrength()).ToString();
@@ -116,12 +123,14 @@ namespace TTRPG_Helper.Forms
                     charismaModDisplay.Text = "+" + getModifier(being.getCharisma()).ToString();
                 }
 
+                //sets the texts of various displays to the proper values
                 healthDisplay.Text = being.getHealth().ToString() + "/" + being.getMaxHealth().ToString();
                 speedDisplay.Text = being.getSpeed().ToString();
                 armorClassDisplay.Text = being.getArmorClass().ToString();
                 nameDisplay.Text = being.getName();
                 raceDisplay.Text = being.getRace();
 
+                //collects each item that the character has and stores them all in the appropriate lists in order to display them in their proper groups
                 foreach (Item item in itembase.Items)
                 {
                     if (item.OwnerId == being.getId())
@@ -144,6 +153,7 @@ namespace TTRPG_Helper.Forms
                     }
                 }
 
+                //adds items that fall under the armor group
                 itemListBox.Items.Add("Armor:");
                 foreach (Armor armor in armorsList)
                 {
@@ -151,6 +161,7 @@ namespace TTRPG_Helper.Forms
                         + ") providing " + armor.getArmorClass().ToString() + " worth {0:C}", armor.getCost()));
                 }
 
+                //adds items that fall under the weapons group
                 itemListBox.Items.Add("");
                 itemListBox.Items.Add("Weapons:");
                 foreach (Weapon weapon in weaponsList)
@@ -160,6 +171,7 @@ namespace TTRPG_Helper.Forms
                         weapon.getDiceSize().ToString() + " damage worth {0:C}", weapon.getCost()));
                 }
 
+                //adds items that do not fit in the armor group or the weapons group
                 itemListBox.Items.Add("");
                 itemListBox.Items.Add("Other:");
                 foreach (Classes.Object item in objectsList)
@@ -168,7 +180,7 @@ namespace TTRPG_Helper.Forms
                         + item.getType() + " worth {0:C}", item.getCost()));
                 }
 
-
+                //gets each spell that the character has prepared and sorts them into attack spells and other spells
                 foreach (PreparedSpell spell in spellbase.PreparedSpells)
                 {
                     if (spell.CharacterId == being.getId())
@@ -184,6 +196,7 @@ namespace TTRPG_Helper.Forms
                     }
                 }
 
+                //displays attack spells in their group
                 spellListBox.Items.Add("Attack Spells:");
                 foreach (Spell spell in attackSpellsList)
                 {
@@ -191,6 +204,7 @@ namespace TTRPG_Helper.Forms
                         "d" + spell.getDiceSize().ToString() + "damage");
                 }
 
+                //displays non-attack spells in their group
                 spellListBox.Items.Add("");
                 spellListBox.Items.Add("Other Spells:");
                 foreach (Spell spell in otherSpellsList)
@@ -198,7 +212,7 @@ namespace TTRPG_Helper.Forms
                     spellListBox.Items.Add(spell.getName());
                 }
 
-
+                //collects and displays all of the bonuses that apply to this character
                 foreach (Bonuses bonus in bonusbase.Bonuses)
                 {
                     if (bonus.CharacterId == being.getId())
@@ -217,6 +231,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //returns the appropriate stat modifier based off of the stat that needs to have its modifier checked
                 if (stat < 2)
                 {
                     return -5;
@@ -290,6 +305,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //loads the form to change the data on the monster, then closes this form if the monster was deleted
                 ManageMonsterForm mcf = new ManageMonsterForm(being);
                 this.Hide();
                 mcf.ShowDialog();
@@ -311,7 +327,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-
+                //goes through and resets the information stored about the character
                 foreach (Character character in bonusbase.Characters)
                 {
                     if (character.Id == being.getId())
@@ -319,6 +335,7 @@ namespace TTRPG_Helper.Forms
                         being = new Being(character.Id, character.Strength, character.Constitution, character.Dexterity,
                             character.Wisdom, character.Intelligence, character.Charisma, character.MaxHealth, character.Speed,
                             character.Health, false, character.CharacterName, character.Race, character.ArmorClass);
+                        return;
                     }
                 }
             }
@@ -332,6 +349,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //opens the bonuses form to allow the user to manage the bonuses that their character has
                 BonusManagementForm bmf = new BonusManagementForm(being.getId(), being.getName());
                 Hide();
                 bmf.ShowDialog();

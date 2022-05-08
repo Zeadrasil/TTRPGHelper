@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/8/2022
+Description: allows the user to choose which character they wish to select for use, create a new character for use, or go to the dungeon master hub*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +18,10 @@ namespace TTRPG_Helper
 {
 	public partial class characterSelect : Form
 	{
+		//storage of characters to limit database calls
 		List<Player> characterList;
+
+		//database access
 		CharacterLINQDataContext playerbase;
 
 		public characterSelect()
@@ -27,6 +33,7 @@ namespace TTRPG_Helper
         {
 			try
 			{
+				//fills character storage and display upon load
 				resetCharacterList();
 			}
 			catch(Exception ex)
@@ -51,6 +58,7 @@ namespace TTRPG_Helper
         {
 			try
 			{
+				//sends the user to the dungeon master hub
 				DMForm dmf = new DMForm();
 				Hide();
 				dmf.ShowDialog();
@@ -67,6 +75,7 @@ namespace TTRPG_Helper
         {
 			try
 			{
+				//sends user to form in order to create a new character
 				NewCharacterForm ncf = new NewCharacterForm(false);
 				Hide();
 				ncf.ShowDialog();
@@ -83,6 +92,7 @@ namespace TTRPG_Helper
         {
 			try
 			{
+				//opens the character sheet for the selected character if a character is selected
 				if(playerListBox.SelectedIndex == -1)
                 {
 					MessageBox.Show("Please choose a character to select");
@@ -105,6 +115,7 @@ namespace TTRPG_Helper
         {
 			try
 			{
+				//resets character storage and display, then refills each
 				characterList = new List<Player>();
 				playerbase = new CharacterLINQDataContext();
 				playerListBox.Items.Clear();

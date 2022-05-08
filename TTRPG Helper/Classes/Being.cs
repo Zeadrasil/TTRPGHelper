@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/7/2022
+Description: class for storing information about a character. This includes players. NPCs. and monsters. Players and NPCs should use the Player subclass,
+as it contains additional features that are necessary for proper functions for those types of characters*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +14,12 @@ namespace TTRPG_Helper.Classes
 {
 	public class Being
 	{
+		//storage for various information used by all types of characters
 		private int characterId, strength, constitution, dexterity, wisdom, intelligence, charisma, maxHealth, speed, health, armorClass;
 		private bool isMonster;
 		private string name, race;
+
+		//allows database access
 		public CharacterLINQDataContext characterbase;
 		public Character character;
 
@@ -37,6 +44,7 @@ namespace TTRPG_Helper.Classes
 			character = new Character();
 		}
 
+		//setters and getters for all of the various types of data stored
 		public int getId()
 		{
 			return characterId;
@@ -159,6 +167,7 @@ namespace TTRPG_Helper.Classes
 			armorClass = ac;
 		}
 
+		//allows saving of the character by either changing an existing character or creating a new database entry
 		public void trySave()
 		{
 			try
@@ -217,12 +226,14 @@ namespace TTRPG_Helper.Classes
 			}
 		}
 
+		//destroys the character and all associated items, spells, and bonuses, in addition to NPC data if applicable
 		public void tryDelete()
 		{
 			try
 			{
 				ItemLINQDataContext itembase = new ItemLINQDataContext();
 
+				//clears associated items
 				foreach(Item item in itembase.Items)
 				{
 					if(item.OwnerId == characterId)
@@ -234,6 +245,7 @@ namespace TTRPG_Helper.Classes
 
 				SpellLINQDataContext spellbase = new SpellLINQDataContext();
 
+				//clears associated spells
 				foreach(PreparedSpell spell in spellbase.PreparedSpells)
 				{
 					if(spell.CharacterId == characterId)
@@ -243,6 +255,7 @@ namespace TTRPG_Helper.Classes
 				}
 				spellbase.SubmitChanges();
 
+				//clears associated npc data
 				foreach(NPC npc in characterbase.NPCs)
                 {
 					if(npc.CharacterId == characterId)
@@ -251,6 +264,7 @@ namespace TTRPG_Helper.Classes
                     }
                 }
 
+				//removes character from database
 				foreach(Character character2 in characterbase.Characters)
 				{
 					if(character2.Id == characterId)

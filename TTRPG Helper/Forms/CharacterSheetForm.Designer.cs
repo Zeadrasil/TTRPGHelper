@@ -75,7 +75,6 @@ namespace TTRPG_Helper.Forms
             this.bonusesListBox = new System.Windows.Forms.ListBox();
             this.bonusesLabel = new System.Windows.Forms.Label();
             this.characterButton = new System.Windows.Forms.Button();
-            this.attackButton = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -540,16 +539,6 @@ namespace TTRPG_Helper.Forms
             this.characterButton.UseVisualStyleBackColor = true;
             this.characterButton.Click += new System.EventHandler(this.characterButton_Click);
             // 
-            // attackButton
-            // 
-            this.attackButton.Location = new System.Drawing.Point(349, 383);
-            this.attackButton.Name = "attackButton";
-            this.attackButton.Size = new System.Drawing.Size(75, 55);
-            this.attackButton.TabIndex = 46;
-            this.attackButton.Text = "Attack";
-            this.attackButton.UseVisualStyleBackColor = true;
-            this.attackButton.Click += new System.EventHandler(this.attackButton_Click);
-            // 
             // backButton
             // 
             this.backButton.Location = new System.Drawing.Point(713, 385);
@@ -566,7 +555,6 @@ namespace TTRPG_Helper.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.backButton);
-            this.Controls.Add(this.attackButton);
             this.Controls.Add(this.characterButton);
             this.Controls.Add(this.bonusesListBox);
             this.Controls.Add(this.bonusesLabel);
@@ -669,7 +657,6 @@ namespace TTRPG_Helper.Forms
         private System.Windows.Forms.ListBox bonusesListBox;
         private System.Windows.Forms.Label bonusesLabel;
         private System.Windows.Forms.Button characterButton;
-        private System.Windows.Forms.Button attackButton;
         private System.Windows.Forms.Button backButton;
     }
 }

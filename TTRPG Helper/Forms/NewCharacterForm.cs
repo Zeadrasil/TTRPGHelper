@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/8/2022
+Description: form for creating a new character or monster*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +17,7 @@ namespace TTRPG_Helper.Forms
 {
     public partial class NewCharacterForm : Form
     {
+        //stores whther the user is allowed to create monsters and NPCs
         bool dungeonMaster;
         public NewCharacterForm(bool dm)
         {
@@ -33,12 +37,15 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //creates a new player if the entered values are acceptable
         private void createPlayerButton_Click(object sender, EventArgs e)
         {
             try
             {
+                //allows creation to proceed if the sttats are all valid values
                 if(checkStats())
                 {
+                    //various other checks that are not used for monsters
                     int tempHolder;
                     if(!int.TryParse(levelTextBox.Text, out tempHolder) || tempHolder < 1)
                     {
@@ -69,6 +76,7 @@ namespace TTRPG_Helper.Forms
                         return;
                     }
 
+                    //creates the new player
                     Player playerStorage = new Player(-1, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
                         int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
                         int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text), 
@@ -83,6 +91,8 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+
+        //checks all of the entered stats to see if they are integers within the range of acceptable values
         private bool checkStats()
         {
             try
@@ -174,6 +184,7 @@ namespace TTRPG_Helper.Forms
             return false;
         }
 
+        //calculates the characters base armor class
         private int getAC()
         {
             try
@@ -246,13 +257,16 @@ namespace TTRPG_Helper.Forms
             }
             return 10;
         }
-
+        
+        //creates a new NPC if the entered values are acceptable and the user is a DM
         private void createNPCButton_Click(object sender, EventArgs e)
         {
             try
             {
+                //allows creation to proceed if the user is a DM and the stats are all acceptable values
                 if (dungeonMaster && checkStats())
                 {
+                    //various other checks that are not used for monsters
                     int tempHolder;
                     if (!int.TryParse(levelTextBox.Text, out tempHolder) || tempHolder < 1)
                     {
@@ -297,6 +311,7 @@ namespace TTRPG_Helper.Forms
                         return;
                     }
 
+                    //creates the NPC
                     Player playerStorage = new Player(-1, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
                         int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
                         int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text),
@@ -304,6 +319,7 @@ namespace TTRPG_Helper.Forms
                         int.Parse(levelTextBox.Text), tempHolder, classTextBox.Text, decTempHolder, false);
                     playerStorage.tryCharacterSaveAsNew();
 
+                    //stores the occupation and location data of the NPC in the database after getting the NPC's character id
                     CharacterLINQDataContext npcbase = new CharacterLINQDataContext();
                     NPC npc = new NPC();
                     foreach(Character character in npcbase.Characters)
@@ -325,12 +341,15 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //creates a new monster if the entered values are acceptable and the user is a DM
         private void createMonsterButton_Click(object sender, EventArgs e)
         {
             try
             {
+                //allows creation if the user is a DM and the stat values are all integer values within the acceptable range
                 if (dungeonMaster && checkStats())
                 {
+                    //creates the monster
                     Being monsterStorage = new Being(-1, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
                         int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
                         int.Parse(charismaTextBox.Text), int.Parse(maxHealthTextBox.Text), int.Parse(speedTextBox.Text),

@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/7/2022
+Description: class allowing for use of character data without excessive database access. Expands on the Being class in order to provide support for 
+features that are not necessary for monsters to have but are important for NPCs and players*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +14,7 @@ namespace TTRPG_Helper.Classes
 {
 	public class Player : Being
 	{
+		//fields that are unnecessary for monsters but important for NPCs and Players
 		private int level, experience;
 		private string playerClass;
 		private decimal money;
@@ -25,6 +30,7 @@ namespace TTRPG_Helper.Classes
 			isPlayer = ply;
 		}
 
+		//setters and getters for added fields
 		public int getLevel()
 		{
 			return level;
@@ -70,6 +76,7 @@ namespace TTRPG_Helper.Classes
 			isPlayer = ply;
 		}
 
+		//saves character either by creating a new database entry or modifying an existing one
 		public void tryCharacterSave()
 		{
 			try

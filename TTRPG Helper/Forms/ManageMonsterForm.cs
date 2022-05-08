@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/8/2022
+Description: Form allowing DM to alter the information of a selected monster*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +16,7 @@ namespace TTRPG_Helper.Forms
 {
     public partial class ManageMonsterForm : Form
     {
+        //being storage to reduce database calls
         Being being;
         public ManageMonsterForm(Being temp)
         {
@@ -32,6 +36,7 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //begins process of deleting the monster
         private void deleteCharacterButton_Click(object sender, EventArgs e)
         {
             try
@@ -48,7 +53,8 @@ namespace TTRPG_Helper.Forms
                 MessageBox.Show(ex.Message);
             }
         }
-
+        
+        //ensures that all of the entered stats are integers within the range of valid stat values
         private bool checkStats()
         {
             try
@@ -139,11 +145,13 @@ namespace TTRPG_Helper.Forms
             }
             return false;
         }
-
+        
+        //fills the fields with the monster's intial values upon load
         private void ManageMonsterForm_Load(object sender, EventArgs e)
         {
             try
             {
+                //loads stats into their displays
                 strengthTextBox.Text = being.getStrength().ToString();
                 constitutionTextBox.Text = being.getConstitution().ToString();
                 dexterityTextBox.Text = being.getDexterity().ToString();
@@ -151,10 +159,10 @@ namespace TTRPG_Helper.Forms
                 intelligenceTextBox.Text = being.getIntelligence().ToString();
                 charismaTextBox.Text = being.getCharisma().ToString();
 
+                //loads the rest of the monster data
                 nameTextBox.Text = being.getName();
                 raceTextBox.Text = being.getRace();
                 speedTextBox.Text = being.getSpeed().ToString();
-
                 maxHealthTextBox.Text = being.getMaxHealth().ToString();
                 healthTextBox.Text = being.getHealth().ToString();
                 armorClassTextBox.Text = being.getArmorClass().ToString();
@@ -165,10 +173,12 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //saves the changed data of the monster if all changes are valid
         private void savePlayerButton_Click(object sender, EventArgs e)
         {
             try
             {
+                //checks to ensure valid values
                 if (checkStats())
                 {
                     int tempHolder;
@@ -178,6 +188,8 @@ namespace TTRPG_Helper.Forms
                         armorClassTextBox.Focus();
                         return;
                     }
+
+                    //creates new monster with the id of the old monster and the entered data
                     int idHolder = being.getId();
                     being = new Being(idHolder, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
                         int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),

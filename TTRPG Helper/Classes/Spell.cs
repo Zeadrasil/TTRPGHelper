@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/7/2022
+Description: class allowing manipulation of spell data without excessive database calls*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +13,11 @@ namespace TTRPG_Helper.Classes
 {
 	class Spell
 	{
+		//various fields storing information about the spell
 		private int spellId, ownerId, diceAmount, diceSize;
 		private string spellName;
+
+		//database access
 		PreparedSpell spell;
 		SpellLINQDataContext spellbase;
 
@@ -26,6 +32,7 @@ namespace TTRPG_Helper.Classes
 			spellbase = new SpellLINQDataContext();
 		}
 
+		//setters and getters
 		public int getId()
 		{
 			return spellId;
@@ -67,6 +74,7 @@ namespace TTRPG_Helper.Classes
 			spellName = name;
 		}
 
+		//allows saving either by altering an existing database entry or by creating a new entry
 		public void trySave()
 		{
 			try
@@ -106,6 +114,7 @@ namespace TTRPG_Helper.Classes
 			}
 		}
 
+		//deletes the spell
 		public void tryDelete()
 		{
 			try

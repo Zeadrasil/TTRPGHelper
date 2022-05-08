@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/7/2022
+Description: class allowing data about items to be handled without excessive database calls. Subclasses for extra information based on whether the item
+is a weapon or armor are best used in those situations, while this one is mainly for use for other types of items*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +14,12 @@ namespace TTRPG_Helper.Classes
 {
 	class Object
 	{
+		//stores various item data
 		private int itemId, ownerId, quantity;
 		private string itemName, itemType;
 		private decimal cost;
+
+		//database access
 		public Item item;
 		public ItemLINQDataContext itembase;
 		
@@ -28,6 +35,7 @@ namespace TTRPG_Helper.Classes
 			itembase = new ItemLINQDataContext();
 		}
 
+		//setters and getters for various fields
 		public int getId()
 		{
 			return itemId;
@@ -78,6 +86,7 @@ namespace TTRPG_Helper.Classes
 			cost = price;
 		}
 
+		//saves item by altering a database entry or creating a new one
 		public void trySave()
 		{
 			try
@@ -119,6 +128,7 @@ namespace TTRPG_Helper.Classes
 			}
 		}
 
+		//deletes the item from the database
 		public void tryDelete()
         {
 			try

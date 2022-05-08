@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author:David Griffith
+ Date: 5/8/2022
+Description: displays all information about a character, and allows users to access forms to alter all of it*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +17,10 @@ namespace TTRPG_Helper.Forms
 {
     public partial class CharacterSheetForm : Form
     {
+        //player info storage to reduce database calls
         Player player;
+
+        //database access
         ItemLINQDataContext itembase;
         SpellLINQDataContext spellbase;
         CharacterLINQDataContext bonusbase;
@@ -27,10 +33,12 @@ namespace TTRPG_Helper.Forms
             bonusbase = new CharacterLINQDataContext();
         }
 
+        //clears character data from displays then reloads it all
         private void resetData()
         {
             try
             {
+                //creates and clears storage structures to hold various data
                 spellListBox.Items.Clear();
                 itemListBox.Items.Clear();
                 bonusesListBox.Items.Clear();
@@ -40,7 +48,7 @@ namespace TTRPG_Helper.Forms
                 List<Spell> attackSpellsList = new List<Spell>();
                 List<Spell> otherSpellsList = new List<Spell>();
 
-
+                //sends stat data directly to appropriate displays
                 strengthStatDisplay.Text = player.getStrength().ToString();
                 constitutionStatDisplay.Text = player.getConstitution().ToString();
                 dexterityStatDisplay.Text = player.getDexterity().ToString();
@@ -48,7 +56,8 @@ namespace TTRPG_Helper.Forms
                 intelligenceStatDisplay.Text = player.getIntelligence().ToString();
                 charismaStatDisplay.Text = player.getCharisma().ToString();
 
-
+                //puts stats through functions to get the stat modifier then displays the modifier with the appropriate
+                //leading symbol in the appropriate display
                 if(getModifier(player.getStrength()) < 0)
                 {
                     strengthModDisplay.Text = getModifier(player.getStrength()).ToString();
@@ -103,6 +112,7 @@ namespace TTRPG_Helper.Forms
                     charismaModDisplay.Text = "+" + getModifier(player.getCharisma()).ToString();
                 }
 
+                //gets other data and displays it in the proper displays
                 healthDisplay.Text = player.getHealth().ToString() + "/" + player.getMaxHealth().ToString();
                 speedDisplay.Text = player.getSpeed().ToString();
                 armorClassDisplay.Text = player.getArmorClass().ToString();
@@ -113,6 +123,7 @@ namespace TTRPG_Helper.Forms
                 raceDisplay.Text = player.getRace();
                 classDisplay.Text = player.getPlayerClass();
 
+                //collects items that the character owns into appropriate structures for their types
                 foreach(Item item in itembase.Items)
                 {
                     if(item.OwnerId == player.getId())
@@ -135,6 +146,7 @@ namespace TTRPG_Helper.Forms
                     }
                 }
 
+                //adds the group of items that are different armors to the items display
                 itemListBox.Items.Add("Armor:");
                 foreach(Armor armor in armorsList)
                 {
@@ -142,6 +154,7 @@ namespace TTRPG_Helper.Forms
                         + ") providing " + armor.getArmorClass().ToString() + " worth {0:C}", armor.getCost()));
                 }
 
+                //adds the group of items that are different weapons to the items display
                 itemListBox.Items.Add("");
                 itemListBox.Items.Add("Weapons:");
                 foreach (Weapon weapon in weaponsList)
@@ -151,6 +164,7 @@ namespace TTRPG_Helper.Forms
                         weapon.getDiceSize().ToString() + " damage worth {0:C}", weapon.getCost()));
                 }
 
+                //adds the group of items that are neither weapons nor armors to the items display
                 itemListBox.Items.Add("");
                 itemListBox.Items.Add("Other:");
                 foreach (Classes.Object item in objectsList)
@@ -159,7 +173,7 @@ namespace TTRPG_Helper.Forms
                         + item.getType() + " worth {0:C}", item.getCost()));
                 }
 
-
+                //collects the spells that the character has prepared into groups depending on whether they are attack spells or not
                 foreach(PreparedSpell spell in spellbase.PreparedSpells)
                 {
                     if(spell.CharacterId == player.getId())
@@ -175,6 +189,7 @@ namespace TTRPG_Helper.Forms
                     }
                 }
 
+                //adds attack spells to the spells display
                 spellListBox.Items.Add("Attack Spells:");
                 foreach(Spell spell in attackSpellsList)
                 {
@@ -182,6 +197,7 @@ namespace TTRPG_Helper.Forms
                         "d" + spell.getDiceSize().ToString() + "damage");
                 }
 
+                //adds non-attack spells to the spells display
                 spellListBox.Items.Add("");
                 spellListBox.Items.Add("Other Spells:");
                 foreach(Spell spell in otherSpellsList)
@@ -189,7 +205,7 @@ namespace TTRPG_Helper.Forms
                     spellListBox.Items.Add(spell.getName());
                 }
 
-
+                //adds the bonuses that apply to the character to the bonuses display
                 foreach(Bonuses bonus in bonusbase.Bonuses)
                 {
                     if(bonus.CharacterId == player.getId())
@@ -208,6 +224,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //fills all of the displays upon load
                 resetData();
             }
             catch(Exception ex)
@@ -216,6 +233,7 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //gets the stat modifier based off of the stat value passed in
         private int getModifier(int stat)
         {
             try
@@ -301,6 +319,7 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //sends the user to the character management form, where they can alter character data
         private void characterButton_Click(object sender, EventArgs e)
         {
             try
@@ -322,6 +341,7 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //resets the player data that is to be displayed
         private void reloadData()
         {
             try
@@ -344,6 +364,7 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //sends the user to the form to manage the bonuses
         private void bonusesButton_Click(object sender, EventArgs e)
         {
             try

@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/8/2022
+Description: form allowing users to change character data*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +17,10 @@ namespace TTRPG_Helper.Forms
 {
     public partial class ManageCharacterForm : Form
     {
+        //player storage to reduce database calls
         Player player;
+
+        //database access
         CharacterLINQDataContext npcbase;
         public ManageCharacterForm(Player playerData)
         {
@@ -23,6 +29,7 @@ namespace TTRPG_Helper.Forms
             npcbase = new CharacterLINQDataContext();
         }
 
+        //begins deletion of character
         private void deleteCharacterButton_Click(object sender, EventArgs e)
         {
             try
@@ -52,12 +59,15 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //saves player if all of the fields are valid
         private void savePlayerButton_Click(object sender, EventArgs e)
         {
             try
             {
+                //checks if stats are valid otherwise does not continue
                 if (checkStats())
                 {
+                    //various field checks
                     int tempHolder;
                     if (!int.TryParse(levelTextBox.Text, out tempHolder) || tempHolder < 1)
                     {
@@ -95,6 +105,7 @@ namespace TTRPG_Helper.Forms
                         return;
                     }
 
+                    //creates character with all of the new data and the old character's Id, then saves that data and overwrites the old character
                     int idHolder = player.getId();
                     player = new Player(idHolder, int.Parse(strengthTextBox.Text), int.Parse(constitutionTextBox.Text),
                         int.Parse(dexterityTextBox.Text), int.Parse(wisdomTextBox.Text), int.Parse(intelligenceTextBox.Text),
@@ -102,6 +113,19 @@ namespace TTRPG_Helper.Forms
                         int.Parse(healthTextBox.Text), false, nameTextBox.Text, raceTextBox.Text, int.Parse(armorClassTextBox.Text),
                         int.Parse(levelTextBox.Text), tempHolder, classTextBox.Text, decTempHolder, true);
                     player.tryCharacterSave();
+
+                    //alters the npc database to have the appropriate occupation and location after they are changed if the character is an NPC
+                    if (!player.getIsPlayer())
+                    {
+                        foreach (NPC npc in new CharacterLINQDataContext().NPCs)
+                        {
+                            if (npc.CharacterId == idHolder)
+                            {
+                                npc.Occupation = occupationTextBox.Text;
+                                npc.Location = locationTextBox.Text;
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -110,6 +134,7 @@ namespace TTRPG_Helper.Forms
             }
         }
 
+        //ensures that all of the entered stat values are integers within the appropriate range
         private bool checkStats()
         {
             try
@@ -201,17 +226,20 @@ namespace TTRPG_Helper.Forms
             return false;
         }
 
+        //fills the fields with the intitial values upon load
         private void ManageCharacterForm_Load(object sender, EventArgs e)
         {
             try
             {
+                //populates stat displays
                 strengthTextBox.Text = player.getStrength().ToString();
                 constitutionTextBox.Text = player.getConstitution().ToString();
                 dexterityTextBox.Text = player.getDexterity().ToString();
                 wisdomTextBox.Text = player.getWisdom().ToString();
                 intelligenceTextBox.Text = player.getIntelligence().ToString();
                 charismaTextBox.Text = player.getCharisma().ToString();
-
+                
+                //populates the second column of text boxes
                 nameTextBox.Text = player.getName();
                 classTextBox.Text = player.getPlayerClass();
                 raceTextBox.Text = player.getRace();
@@ -219,11 +247,13 @@ namespace TTRPG_Helper.Forms
                 levelTextBox.Text = player.getLevel().ToString();
                 experienceTextBox.Text = player.getXP().ToString();
 
+                //populates third row of text boxes
                 maxHealthTextBox.Text = player.getMaxHealth().ToString();
                 healthTextBox.Text = player.getHealth().ToString();
                 moneyTextBox.Text = Math.Round(player.getMoney(), 2).ToString();
                 armorClassTextBox.Text = player.getArmorClass().ToString();
 
+                //populates the occupation and location text boxes if the player is an NPC
                 if (!player.getIsPlayer())
                 {
                     foreach (NPC npc in npcbase.NPCs)
@@ -236,6 +266,7 @@ namespace TTRPG_Helper.Forms
                         }
                     }
                 }
+                //defaults the occupaiton and location text boxes if the character is not an NPC
                 occupationTextBox.Text = "N/A";
                 locationTextBox.Text = "N/A";
             }

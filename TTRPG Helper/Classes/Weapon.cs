@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/7/2022
+Description: class extending the Object class allowing for weapons to have additional features that are unnecessary for normal items*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +13,7 @@ namespace TTRPG_Helper.Classes
 {
 	class Weapon : Object
 	{
+		//extra fields normal Objects do not have
 		private int diceSize, diceAmount;
 
 		public Weapon(int id, int own, int quan, string name, string type, decimal cst, int dice, int size) : base(id, own, quan, name, type, cst)
@@ -18,6 +22,7 @@ namespace TTRPG_Helper.Classes
 			diceAmount = dice;
 		}
 
+		//setters and getters
 		public int getDiceAmount()
 		{
 			return diceAmount;
@@ -36,6 +41,7 @@ namespace TTRPG_Helper.Classes
 			diceSize = size;
 		}
 
+		//saves weapons either by altering existing database entries or making new ones
 		public void tryWeaponSave()
 		{
 			try

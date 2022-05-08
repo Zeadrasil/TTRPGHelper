@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David griffith
+ Date: 5/7/2022
+Description: class allowing data about bonuses to be handled without excessive database calls*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +13,11 @@ namespace TTRPG_Helper.Classes
 {
     public class Bonus
     {
+        //stores information about the bonus
         private int id, characterId;
         private string effect;
+
+        //database access
         private CharacterLINQDataContext bonusbase;
 
         public Bonus(int bonusId, int ownerId, string bonusEffect)
@@ -22,6 +28,7 @@ namespace TTRPG_Helper.Classes
             bonusbase = new CharacterLINQDataContext();
         }
 
+        //setters and getters for stored information
         public int getId()
         {
             return id;
@@ -45,6 +52,7 @@ namespace TTRPG_Helper.Classes
             effect = newEffect;
         }
 
+        //saves data either by altering existing database entries or by making a new one
         public void trySave()
         {
             try
@@ -81,6 +89,7 @@ namespace TTRPG_Helper.Classes
             }
         }
 
+        //deletes the bonus
         public void tryDelete()
         {
             try

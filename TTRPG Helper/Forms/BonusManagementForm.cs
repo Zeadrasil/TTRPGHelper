@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*Author: David Griffith
+ Date: 5/7/2022
+Description: allows users to manage the bonuses of the selected character by creating editing, and removing bonuses*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +18,11 @@ namespace TTRPG_Helper.Forms
 {
     public partial class BonusManagementForm : Form
     {
+        //various information storage fields
         int id;
         List<Bonus> bonusList;
+
+        //database access
         CharacterLINQDataContext bonusbase;
 
         public BonusManagementForm(int characterId, string characterName)
@@ -31,6 +37,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //fills displays and storages upon load
                 reloadBonuses();
             }
             catch (Exception ex)
@@ -43,6 +50,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //resets then fills displays and storage structures with information about the selected character's bonuses
                 bonusListBox.Items.Clear();
                 bonusList = new List<Bonus>();
                 bonusbase = new CharacterLINQDataContext();
@@ -77,6 +85,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //begins removal of selected bonus
                 ConfirmDeleteForm cdf = new ConfirmDeleteForm(bonusList[bonusListBox.SelectedIndex]);
                 cdf.ShowDialog();
                 if (bonusList[bonusListBox.SelectedIndex].getId() == -1)
@@ -94,6 +103,7 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
+                //saves the effect in the effect text box as a new bonus
                 Bonus bonus = new Bonus(-1, id, effectTextBox.Text);
                 bonus.trySaveAsNew();
                 reloadBonuses();
@@ -120,9 +130,17 @@ namespace TTRPG_Helper.Forms
         {
             try
             {
-                bonusList[bonusListBox.SelectedIndex].setEffect(effectTextBox.Text);
-                bonusList[bonusListBox.SelectedIndex].trySave();
-                reloadBonuses();
+                //alters the effect of the selected bonus with alterations made in the effect text box as long as something is selected
+                if (bonusListBox.SelectedIndex != -1)
+                {
+                    bonusList[bonusListBox.SelectedIndex].setEffect(effectTextBox.Text);
+                    bonusList[bonusListBox.SelectedIndex].trySave();
+                    reloadBonuses();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a bonus to edit");
+                }
             }
             catch (Exception ex)
             {
