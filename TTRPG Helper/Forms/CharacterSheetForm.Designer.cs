@@ -76,6 +76,7 @@ namespace TTRPG_Helper.Forms
             this.bonusesLabel = new System.Windows.Forms.Label();
             this.characterButton = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
+            this.attackButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // strengthStatDisplay
@@ -490,6 +491,7 @@ namespace TTRPG_Helper.Forms
             this.inventoryButton.TabIndex = 40;
             this.inventoryButton.Text = "Manage Inventory";
             this.inventoryButton.UseVisualStyleBackColor = true;
+            this.inventoryButton.Click += new System.EventHandler(this.inventoryButton_Click);
             // 
             // spellsButton
             // 
@@ -499,6 +501,7 @@ namespace TTRPG_Helper.Forms
             this.spellsButton.TabIndex = 41;
             this.spellsButton.Text = "Manage Spells";
             this.spellsButton.UseVisualStyleBackColor = true;
+            this.spellsButton.Click += new System.EventHandler(this.spellsButton_Click);
             // 
             // bonusesButton
             // 
@@ -549,11 +552,22 @@ namespace TTRPG_Helper.Forms
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // attackButton
+            // 
+            this.attackButton.Location = new System.Drawing.Point(349, 383);
+            this.attackButton.Name = "attackButton";
+            this.attackButton.Size = new System.Drawing.Size(75, 55);
+            this.attackButton.TabIndex = 95;
+            this.attackButton.Text = "Attack";
+            this.attackButton.UseVisualStyleBackColor = true;
+            this.attackButton.Click += new System.EventHandler(this.attackButton_Click);
+            // 
             // CharacterSheetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.attackButton);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.characterButton);
             this.Controls.Add(this.bonusesListBox);
@@ -658,5 +672,6 @@ namespace TTRPG_Helper.Forms
         private System.Windows.Forms.Label bonusesLabel;
         private System.Windows.Forms.Button characterButton;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button attackButton;
     }
 }

@@ -89,6 +89,7 @@ namespace TTRPG_Helper.Forms
             this.attackButton.TabIndex = 94;
             this.attackButton.Text = "Attack";
             this.attackButton.UseVisualStyleBackColor = true;
+            this.attackButton.Click += new System.EventHandler(this.attackButton_Click);
             // 
             // characterButton
             // 
@@ -137,6 +138,7 @@ namespace TTRPG_Helper.Forms
             this.spellsButton.TabIndex = 89;
             this.spellsButton.Text = "Manage Spells";
             this.spellsButton.UseVisualStyleBackColor = true;
+            this.spellsButton.Click += new System.EventHandler(this.spellsButton_Click);
             // 
             // inventoryButton
             // 

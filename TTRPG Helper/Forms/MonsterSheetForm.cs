@@ -361,5 +361,22 @@ namespace TTRPG_Helper.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void spellsButton_Click(object sender, EventArgs e)
+        {
+            spellManagementForm spells = new spellManagementForm();
+            Hide();
+            spells.ShowDialog();
+            Show();
+            resetData();
+        }
+
+        private void attackButton_Click(object sender, EventArgs e)
+        {
+            DiceForm spells = new DiceForm();
+            spells.ShowDialog();
+            Show();
+            resetData();
+        }
     }
 }
