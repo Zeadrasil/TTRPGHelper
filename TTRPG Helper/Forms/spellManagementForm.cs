@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Auth: Logan Wright
+//Desc: gives the user the ability to manage spells
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

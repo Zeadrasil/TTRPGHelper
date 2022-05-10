@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Auth: Logan Wright
+//Desc: gives the user the ability to manage there inventory
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

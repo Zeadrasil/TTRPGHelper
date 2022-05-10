@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Auth: Logan Wright
+//Disc: this form allows the user to roll how ever many dice there system can handle
+//      as well as showing the outcome of each dice group and the total over all.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +25,7 @@ namespace TTRPG_Helper
         {
 
         }
-
+        //the following roll functions do as said... roll the dice for the user
         private int roll20(string count)
         {
             int total = 0;
@@ -31,7 +35,7 @@ namespace TTRPG_Helper
                 while (times != 0)
                 {
                     Random rnd = new Random();
-                    int nRoll = rnd.Next(1, 21); // creates a number between 1 and 20
+                    int nRoll = rnd.Next(1, 21);
                     total = total + nRoll;
                     times = times - 1;
                 }
@@ -53,7 +57,7 @@ namespace TTRPG_Helper
                 while (times != 0)
                 {
                     Random rnd = new Random();
-                    int nRoll = rnd.Next(1, 13); // creates a number between 1 and 20
+                    int nRoll = rnd.Next(1, 13); 
                     total = total + nRoll;
                     times--;
                 }
@@ -75,7 +79,7 @@ namespace TTRPG_Helper
                 while (times != 0)
                 {
                     Random rnd = new Random();
-                    int nRoll = rnd.Next(1, 11); // creates a number between 1 and 20
+                    int nRoll = rnd.Next(1, 11); 
                     total = total + nRoll;
                     times--;
                 }
@@ -97,7 +101,7 @@ namespace TTRPG_Helper
                 while (times != 0)
                 {
                     Random rnd = new Random();
-                    int nRoll = rnd.Next(1, 9); // creates a number between 1 and 20
+                    int nRoll = rnd.Next(1, 9);
                     total = total + nRoll;
                     times--;
                 }
@@ -176,6 +180,7 @@ namespace TTRPG_Helper
             }
         }
 
+        //the following adds on what the user selects to be rolled
         private void d20PB_Click(object sender, EventArgs e)
         {
             int total = Int32.Parse(d20TB.Text) + 1;
@@ -218,6 +223,7 @@ namespace TTRPG_Helper
             d100TB.Text = "" + total;
         }
 
+        //clears and resets the textboxes
         private void clearButton_Click(object sender, EventArgs e)
         {
             try
@@ -246,11 +252,13 @@ namespace TTRPG_Helper
             }
         }
 
+        //quits the program
         private void quitButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //totals up all of the rolls that were stored in TextBoxes for the users to see in the total TextBox
         private string totalAll()
         {
             try
@@ -269,6 +277,7 @@ namespace TTRPG_Helper
             
         }
 
+        //this function rools all of the dice and puts the values in there respected output boxes
         private void rollButton_Click(object sender, EventArgs e)
         {
             try
